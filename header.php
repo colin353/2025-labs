@@ -1,16 +1,6 @@
 <?php 
 
-session_start();
-include('/include/functions.php');
-foreach (glob("copy/*.php") as $filename)
-{
-    include $filename;
-}
-
-if(isAuthenticated()) {
-	include('/include/connect_db.php');	
-}
-
+include('/include/init.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"

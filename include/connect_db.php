@@ -1,9 +1,9 @@
 <?php
 
-$link = mysql_connect('localhost','colin','colin');
+$link = mysql_connect('localhost','collaborate','collaborate');
 if (!$link) {
 	die('Could not connect to MySQL: ' . mysql_error());
 }
-echo 'Connection OK'; mysql_close($link); 
+mysql_close($link); 
 
 ?>

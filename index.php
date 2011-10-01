@@ -1,4 +1,8 @@
-<?php include("header.php"); ?>
+<?php include("header.php"); 
+
+if(isAuthenticated()) header('Location: /collaborate/')
+
+?>
 
 	
 <script type=text/javascript>
@@ -48,7 +52,7 @@ function golink(target) {
 
 <div id=login_box>
 		<span><?php echo HEADER_LOGIN_HERE; ?></span>
-		<form id=login_form action='login.php' method='post'>
+		<form id=login_form action='collaborate/login.php' method='post'>
 			<input autofocus type=text placeholder="username" name=username />
 			<input type=password placeholder="password" name=password />
 			<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
