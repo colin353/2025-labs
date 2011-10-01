@@ -67,6 +67,34 @@ div#content_shim {
 	max-width: 900px;
 }
 
+div#login_box {
+	padding: 20px 20px 20px 20px;
+	position: absolute;
+	z-index: 0;
+	left: 40px;
+	top: 40%;
+	width: 400px;
+	height: 100px;	
+}
+
+form#login_form > input {
+	margin-top: 10px;
+	height: 30px;
+	font-size: 25px;
+	width: 140px;
+}
+
+div#login_shim {
+	position: absolute;
+	z-index: -1;
+	background-color: white;
+	opacity: 0.8;
+	left: 40px;
+	top: 40%;
+	width: 400px;
+	height: 100px;	
+}
+
 div#content {
 	position: absolute;
 	left: 40px;
@@ -88,11 +116,11 @@ div.hiding {
 div#content > h1 {
 	margin-left: 40px;
 	margin-right: 40px;
-	font-size: 30pt;
+	font-size: 20pt;
 	font-weight: bold;
 }
 div#content > p {
-	font-size: 20pt;
+	font-size: 15pt;
 	margin-left: 40px;
 	margin-right: 40px;
 }
