@@ -6,7 +6,14 @@
 
 /* Background and header style */
 
-body {	font-family: 'Arial','Bitstream Vera Sans, '; }
+@font-face {
+  font-family: Bits;
+  src: url('/fonts/Vera.ttf');
+}
+
+body { overflow: hidden;	font-family: Bits, 'Arial'; }
+
+
 
 div#header > img { 
 	width: 400px; 
@@ -40,8 +47,7 @@ div#shim {
 	height: 200px;
 	width: 100%;
 	opacity: 0.6;
-	
-filter:alpha(opacity=60); /* For IE8 and earlier */	
+	filter:alpha(opacity=60); /* For IE8 and earlier */	
 	background-color: white;	
 	z-index: -1;
 }
@@ -53,10 +59,12 @@ div#content_shim {
 	display: none;
 	width: 80%;
 	background-color: white;
-	opacity: 0.6;
+	opacity: 0.8;
 	
-filter:alpha(opacity=60); /* For IE8 and earlier */	
+	filter:alpha(opacity=60); /* For IE8 and earlier */	
 	z-index: 0;
+	
+	max-width: 900px;
 }
 
 div#content {
@@ -70,6 +78,7 @@ div#content {
 	background-color: transparent;	
 	z-index: 10;
 	overflow-y: auto;
+	max-width: 900px;
 }
 
 div.hiding {

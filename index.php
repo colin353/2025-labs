@@ -15,20 +15,24 @@
 	<link rel=stylesheet href="style/style.css" />
 	
 	<script type=text/javascript>
+		var menuitem = 0;
 		
 		function golink(target) {
-			if(target == 'nowhere') {
+			if(target == menuitem) return;
+			if(target == 0) {
 				$('#content_shim').hide('fast');
 				$('#content').hide('fast');
+				menuitem = 0;
 				return;
 			}
 			$('#content_shim').hide('fast');
 			$('#content').hide('fast',function () {
 					
-					$('#content').html($('.'+target).html());
+					$('#content').html($('.menuitem'+target).html());
 					$('#content').show('fast');
 					$('#content_shim').show('fast');				
-			});			
+			});
+			menuitem = target;			
 		}
 		
 	</script>
@@ -37,16 +41,16 @@
 </head>
 <body>
 	
-<img onClick="golink('nowhere')" src="/images/activate.jpg" id="bg" alt="">
+<img onClick="golink(0)" src="/images/activate.jpg" id="bg" alt="">
 
 <div id="header">
-	<img  onClick="golink('nowhere')" src="/images/2025.png" />
+	<img  onClick="golink(0)" src="/images/2025.png" />
 	
 	<ul> 
-		<li onClick="golink('about-text')">about 2025</li>
-		<li onClick="golink('latest-text')">latest</li>
-		<li onClick="golink('bios-text')">bios</li>
-		<li onClick="golink('contact-text')">contact</li>	
+		<li onClick="golink(1)">about 2025</li>
+		<li onClick="golink(2)">latest</li>
+		<li onClick="golink(3)">bios</li>
+		<li onClick="golink(4)">contact</li>	
 	</ul>
 	
 </div>
@@ -55,22 +59,22 @@
 		
 </div> 
 
-<div class='about-text hiding'>
+<div class='menuitem1 hiding'>
 
 	<h1>Hi.</h1>
-	<p>Welcome to twenty twenty-five. What do we do? We don't even know. Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.Welcome to twenty twenty-five. What do we do? We don't even know.</p>
-	<p>Here is some extra texty text yeahh</p>
+	<p>Welcome to 2025 laboratories.</p>
+	<p>We are an engineering collective interested in software, electronics, robotics, and the future. </p>
 	
 </div>
 
-<div class='latest-text hiding'>
+<div class='menuitem2 hiding'>
 	<h1>A crazy app we made</h1>
 	<p>IT does some crazy things</p>
 	<p>Man let me tell you it is so crazy yo</p>
 	
 </div>
 
-<div class='bios-text hiding'>
+<div class='menuitem3 hiding'>
 	<h1>Employee A</h1>
 	<p>I never liked him very much</p>
 	<h1>Employee B</h1>
@@ -78,7 +82,7 @@
 		
 </div>
 
-<div class='contact-text hiding'>
+<div class='menuitem4 hiding'>
 	<h1>Phone us</h1>
 	<p>We have a phone</p>
 	<p>etc</p>
