@@ -1,0 +1,90 @@
+/* jQuery fullsize background trick */
+
+body { margin: 0; padding: 0; }
+
+#bg { position: fixed; top: 0; left: 0; z-index: -1; }
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+
+/* Background and header style */
+
+@font-face {
+  font-family: Bits;
+  src: url('/fonts/Vera.ttf');
+}
+
+body { overflow: hidden;	font-family: Bits, 'Arial'; }
+
+div#header > img { 
+	display:inline;
+	width: 400px; 
+	z-index: 10;
+	left: 20px;
+	top: 20px;
+	margin-left: 10px;
+	margin-top: 15px;
+}
+
+div#header > ul {
+	/*width: 100%;*/
+	margin-top: 120px;
+	margin-left: 50px;
+	display: inline;
+}
+
+div#header ul> li > a:hover {
+	text-decoration: underline;
+}
+
+div#header ul>li>a {
+	color: black;
+	text-decoration: none;	
+}
+
+div#header {
+
+	border-bottom: 3px solid black;
+	margin: 0 0 0 0;	
+	display: block;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+div#header > ul > li {
+		font-size: 20pt;
+		display: inline;
+		list-style-type: none;
+		margin-left: 60px;
+		margin-top: 120px;
+}
+
+div#header { }
+
+div#shim { 
+	position: absolute; 
+	top: 0; left: 0;
+	height: 200px;
+	width: 100%;
+	z-index: -1;
+	background-color: gray;	
+}
+
+div#content {
+
+}
+
+div.hiding {
+	display:none;	
+}
+
+div#content > h1 {
+	margin-left: 40px;
+	margin-right: 40px;
+	font-size: 20pt;
+	font-weight: bold;
+}
+div#content > p {
+	font-size: 15pt;
+	margin-left: 40px;
+	margin-right: 40px;
+}

@@ -1,0 +1,4 @@
+RewrwiteEngine On
+RewriteRule ^([a-zA-Z0-9-z\-]+)/([a-zA-Z0-9-z\-]+)/?$ $1.php?page=$2 
+
+RewriteRule ^([a-z]+)/([a-z0-9\-]+)$ $1.php?q=$2 [L,QSA]

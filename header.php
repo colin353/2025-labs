@@ -18,4 +18,3 @@ include('/include/init.php');
 <script src="js/bg_full.js"></script>
 			
 <link rel=stylesheet href="style/style.css" />
-

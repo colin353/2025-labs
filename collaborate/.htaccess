@@ -1,0 +1,13 @@
+RewriteEngine On
+
+
+    # Checks to see if the user is attempting to access a valid file,
+    # such as an image or css document. If this isn't true, it sends the
+    # request to index.php
+
+#RewriteRule /*images/(.*) collaborate/images/$1 [L]
+#RewriteRule /*style/(.*) collaborate/style/$1 [L]
+
+RewriteCond %{REQUEST_URI} !/*images/(.*)
+RewriteCond %{REQUEST_URI} !/*style/(.*) 
+RewriteRule ^(.*?)$ decode.php
