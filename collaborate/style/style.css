@@ -32,13 +32,21 @@ div#header > ul {
 	display: inline;
 }
 
-div#header ul> li > a:hover {
+a:hover {
 	text-decoration: underline;
 }
 
-div#header ul>li>a {
+a {
 	color: black;
 	text-decoration: none;	
+}
+
+h1 {
+	margin-left: 0px;	
+}
+
+b {
+	font-weight: bold;	
 }
 
 div#header {
@@ -60,6 +68,12 @@ div#header > ul > li {
 
 div#header { }
 
+span.sidenote {
+	font-size: 12pt;
+	font-weight: normal;	
+	margin-left: 20px;
+}
+
 div#shim { 
 	position: absolute; 
 	top: 0; left: 0;
@@ -70,21 +84,27 @@ div#shim {
 }
 
 div#content {
-
+	margin-top:30px;
+	margin-left: 40px;
 }
+
 
 div.hiding {
 	display:none;	
 }
 
 div#content > h1 {
-	margin-left: 40px;
+	margin-left: 0px;
 	margin-right: 40px;
 	font-size: 20pt;
 	font-weight: bold;
 }
 div#content > p {
 	font-size: 15pt;
-	margin-left: 40px;
+	margin-left: 0px;
 	margin-right: 40px;
+}
+
+div.people-entry {
+	margin-bottom: 40px;	
 }

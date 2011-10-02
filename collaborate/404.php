@@ -1,6 +1,2 @@
-<div id=content>
-	
-	The page you're looking for can't be found!
-	
-	
-</div>
+<h1>Oh no!</h1>
+<p>The page you're looking for can't be found!</p>

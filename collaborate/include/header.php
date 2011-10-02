@@ -12,22 +12,29 @@
 
 <script src="js/bg_full.js"></script>
 			
-<link rel=stylesheet href="style/style.css" />
+<link rel=stylesheet href="<?php echo BASE_URL; ?>style/style.css" />
+
+<script type=text/javascript>
+	function goto(address) {
+		window.location = address;
+	}	
+</script>
 
 </head>
 
 <body>
 	
 <div id=header> 
-<img src="/images/2025.png" />
+<img onClick="goto('/collaborate/')" src="/images/2025.png" />
 	
 	<ul> 
-		<li><a href="projects"><?php echo COLLAB_MENU1;?></a></li>
-		<li><a href="finances"><?php echo COLLAB_MENU2;?></a></li>
-		<li><a href="people"><?php echo COLLAB_MENU3;?></a></li>
-		<li><a href="logout.php"><?php echo COLLAB_MENU_LOGOUT;?></a></li>	
+		<li><a href="<?php echo BASE_URL; ?>projects"><?php echo COLLAB_MENU1;?></a></li>
+		<li><a href="<?php echo BASE_URL; ?>finances"><?php echo COLLAB_MENU2;?></a></li>
+		<li><a href="<?php echo BASE_URL; ?>people"><?php echo COLLAB_MENU3;?></a></li>
+		<li><a href="<?php echo BASE_URL; ?>logout.php"><?php echo COLLAB_MENU_LOGOUT;?></a></li>	
 	</ul>
 
 </div>
 
+<div id=content>
 

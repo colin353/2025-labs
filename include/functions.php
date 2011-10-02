@@ -7,4 +7,9 @@ function isAuthenticated() {
 	else return false;
 } 
 
+function getFirstName($name) {
+	$n = explode(" ",$name);
+	return $n[0];
+}
+
 ?>
