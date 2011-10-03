@@ -13,7 +13,7 @@ body { margin: 0; padding: 0; }
   src: url('/fonts/Vera.ttf');
 }
 
-body { overflow: hidden;	font-family: Bits, 'Arial'; }
+body { overflow: auto;	font-family: Bits, 'Arial'; }
 
 div#header > img { 
 	display:inline;
@@ -90,6 +90,13 @@ div#content {
 	margin-left: 40px;
 }
 
+div#new_status_update {
+	display: none;	
+}
+
+div#new_status_update > form > input {
+	width: 500px;	
+}
 
 div.hiding {
 	display:none;	

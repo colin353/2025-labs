@@ -5,6 +5,7 @@ function nope_chuck_testa() {
 	<p>I bet you thought that was a real user ID.</p>
 	<h1>NOPE!</h1>
 	
+	<p>-- Chuck Testa</p>
 	<?php
 	
 	return;
