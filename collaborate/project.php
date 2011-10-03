@@ -21,7 +21,7 @@ else {
 <h1><?php echo $p['project_name']; ?></h1>
 <p><?php echo $p['project_description']; ?> </p>
 <br />
-<h2>Project members:</h2>
+<p><b>Project members:</b></p>
 
 <?php 
 
@@ -46,7 +46,13 @@ while($d = mysql_fetch_assoc($people)) {
 <script type=text/javascript>
 	
 	function addNewThing() {
-		$('#new_status_update').show('fast');		
+		$('#new_status_update').show('fast');	
+		$('#the_data').focus();	
+	}
+	
+	function addNewResource() {
+		$('#new_resource').show('fast');		
+		$('#the_resource_title').focus();
 	}
 	
 	function new_status() {
@@ -56,7 +62,14 @@ while($d = mysql_fetch_assoc($people)) {
 				);
 				return false;
 	}
-	
+	function new_resource() {
+				$.post('<?php echo BASE_URL; ?>action.php',{resource: true, p: <?php echo $p['project_id']; ?>,t:$("#the_resource_title").val(), q: $("#the_resource_data").val()}, function(data) {
+				  			alert(data);
+				  			window.location.reload(true);
+ 					 }
+				);
+				return false;
+	}
 </script>
 
 <p><b>Latest status updates: </b><span class=sidenote>
@@ -75,7 +88,7 @@ while($d = mysql_fetch_assoc($people)) {
 	
 </p>
 	
-<div id=new_status_update>
+<div id=new_status_update class=hiding>
 	<form onSubmit='return new_status();' >
 		<input type="text" value="" id=the_data placeholder="Status update here..." /><span class=sidenote>-- <?php echo $_SESSION['user_realname']; ?></span>		
 		<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
@@ -92,5 +105,39 @@ while($status = mysql_fetch_assoc($statuss)) {
 <p><span><?php echo $status['projectstatus_status']; ?></span><span class=sidenote>-- <?php echo $status['user_realname']; ?>, about 15 minutes ago</span></p>
 
 <?php } ?>
+<br />
 
-<h2></h2>
+<p><b>Resources:</b><span class=sidenote>
+	
+	<?php
+	
+	if(mysql_num_rows(mysql_query('select * from projectmemberships where projectmembership_project_id = '.mysql_real_escape_string($_REQUEST['q']).' and projectmembership_user_id='.$_SESSION['user_id'])) > 0) {  ?>
+	
+	<a onClick=addNewResource()>+ new resource</a>
+	
+	<?php
+	
+	}
+	
+	?>
+	
+</span></p>
+<div id=new_resource class=hiding>
+	<form onSubmit='return new_resource();' >
+		<input type="text" value="" id=the_resource_title placeholder="Resource title..." /><input type="text" value="" id=the_resource_data placeholder="Resource..." />		
+		<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
+	</form>
+	
+</div>
+<?php
+
+$resources = mysql_query('select * from projectresource where projectresource_project_id= '.mysql_real_escape_string($_REQUEST['q']).' order by projectresource_title asc limit 0,3') or die(mysql_error());
+while($resource = mysql_fetch_assoc($resources)) {
+
+?>
+<p><span class=leftcol><?php echo $resource['projectresource_title']; ?></span><span class=rightcol><?php echo encapsulateIfURL($resource['projectresource_value']); ?></span></p>
+
+<?php } ?>
+
+
+

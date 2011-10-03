@@ -8,8 +8,15 @@ function isAuthenticated() {
 } 
 
 function getFirstName($name) {
+	//if($name == $_SESSION['user_realname']) return "";
 	$n = explode(" ",$name);
 	return $n[0];
+}
+
+function encapsulateIfURL($string) {
+	if(preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $string)) return "<a href='$string'>$string</a>";
+	else return $string;
+	
 }
 
 ?>

@@ -90,12 +90,20 @@ div#content {
 	margin-left: 40px;
 }
 
-div#new_status_update {
-	display: none;	
+span.leftcol {
+	width: 300px;
+	margin-right: 20px;
+	float:left;
+	clear: none;
 }
 
 div#new_status_update > form > input {
 	width: 500px;	
+}
+
+div#new_resource > form > input {
+	width: 270px;
+	margin-right: 40px;	
 }
 
 div.hiding {
