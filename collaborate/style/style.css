@@ -32,6 +32,8 @@ div#header > ul {
 	display: inline;
 }
 
+
+
 a:hover {
 	text-decoration: underline;
 }
@@ -106,5 +108,7 @@ div#content > p {
 }
 
 div.people-entry {
-	margin-bottom: 40px;	
+	margin-bottom: 40px;
+	border-left: 3px solid black;
+	padding-left: 20px;	
 }
