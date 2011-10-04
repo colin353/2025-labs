@@ -1,2 +1,2 @@
-<h1>Oh no!</h1>
-<p>The page you're looking for can't be found!</p>
+<h1>Page no findings</h1>
+<p>Please, cannot finding page</p>

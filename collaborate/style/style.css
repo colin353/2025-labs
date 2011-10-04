@@ -13,6 +13,64 @@ body { margin: 0; padding: 0; }
   src: url('/fonts/Vera.ttf');
 }
 
+@font-face {
+  font-family: Bits;
+  src: url('/fonts/VeraBd.ttf');
+  font-weight: bold;
+}
+
+div.actions {
+	margin-left: -40px;
+	padding: 0;
+	height: 30px;
+}
+div.actions > ul {
+	list-style-type: none;
+}
+div.actions > ul > li:firsty-child {
+	margin-right: 5px;
+	padding-right: 10px;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	margin-left: -20px;
+}
+
+
+
+div.actions > ul > li {
+	padding-right: 20px;
+	padding-left: 20px;
+	color: white;
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 5px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-top: 5px;
+	background-color: black;
+	float: left;
+}
+
+div.actions > ul > li:hover {
+	background-color: #444444;
+}
+
+
+	background-color: black;	
+}
+
+div.actions > div {
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	font-size: 12pt;
+	padding: 5px 5px 5px 5px;
+	float:left;
+	display: inline;
+	width: 80px;
+}
+
 body { overflow: auto;	font-family: Bits, 'Arial'; }
 
 div#header > img { 
@@ -106,16 +164,23 @@ div#new_resource > form > input {
 	margin-right: 40px;	
 }
 
-div.hiding {
+*.hiding {
 	display:none;	
 }
 
 div#content > h1 {
 	margin-left: 0px;
 	margin-right: 40px;
-	font-size: 20pt;
+	/*font-size: 20pt;*/
 	font-weight: bold;
 }
+
+h2 {
+	display:inline;
+	text-decoration: underline;	
+	font-size: 16pt;
+}
+
 div#content > p {
 	font-size: 15pt;
 	margin-left: 0px;
@@ -126,4 +191,32 @@ div.people-entry {
 	margin-bottom: 40px;
 	border-left: 3px solid black;
 	padding-left: 20px;	
+}
+
+form {
+	display: inline;	
+}
+
+div.milestone {
+	background-color: 	#DDDDDD;
+	padding: 10px 20px 10px 20px;
+	width: 730px;
+	margin-bottom: 40px;
+}	
+div.milestone > span > b {
+	margin-left: 20px;	
+}
+
+div.milestone > div {
+	margin-top: 20px;	
+}
+
+div.milestone > div > span {
+	margin-right: 20px;
+	margin-left: 5px;
+}
+
+input.todolistforms {
+	margin-left: 20px;
+	width: 500px;
 }

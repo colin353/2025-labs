@@ -14,10 +14,13 @@
 			
 <link rel=stylesheet href="<?php echo BASE_URL; ?>style/style.css" />
 
+<script src="<?php echo BASE_URL; ?>js/functions.js" type=text/javascript></script>
 <script type=text/javascript>
 	function goto(address) {
 		window.location = address;
 	}	
+	request_q = <?php if(isset($_REQUEST['q'])) echo $_REQUEST['q']; else echo 0; ?>;
+	BASE_URL = '<?php echo BASE_URL; ?>';
 </script>
 
 </head>

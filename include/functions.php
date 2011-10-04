@@ -15,8 +15,19 @@ function getFirstName($name) {
 
 function encapsulateIfURL($string) {
 	if(preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $string)) return "<a href='$string'>$string</a>";
-	else return $string;
-	
+	else return $string;	
 }
+
+function displayActionMenu($k) {
+?>
+<div class=actions>	
+	<ul>
+		<?php foreach($k as $w => $l) { ?><li onClick=actionMenu('<?php echo BASE_URL.$l; ?>')><?php echo $w; ?></li><?php } ?>
+	</ul>
+</div>
+<?php
+}
+
+
 
 ?>

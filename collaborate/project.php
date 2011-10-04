@@ -20,8 +20,14 @@ else {
 
 <h1><?php echo $p['project_name']; ?></h1>
 <p><?php echo $p['project_description']; ?> </p>
+<?php 
+$k['to-do list'] = 'project-to-do/'.$_REQUEST['q'];
+$k['finances'] = 'finance/'.$_REQUEST['q'];
+displayActionMenu($k);
+
+?>
 <br />
-<p><b>Project members:</b></p>
+<p><h2><?php echo COLLAB_PROJECT_MEMBERS; ?></h2></p>
 
 <?php 
 
@@ -43,42 +49,14 @@ while($d = mysql_fetch_assoc($people)) {
 ?>
 <br />
 
-<script type=text/javascript>
-	
-	function addNewThing() {
-		$('#new_status_update').show('fast');	
-		$('#the_data').focus();	
-	}
-	
-	function addNewResource() {
-		$('#new_resource').show('fast');		
-		$('#the_resource_title').focus();
-	}
-	
-	function new_status() {
-				$.post('<?php echo BASE_URL; ?>action.php',{status: true, p: <?php echo $p['project_id']; ?>, q: $("#the_data").val()}, function(data) {
-				  			window.location.reload(true);
- 					 }
-				);
-				return false;
-	}
-	function new_resource() {
-				$.post('<?php echo BASE_URL; ?>action.php',{resource: true, p: <?php echo $p['project_id']; ?>,t:$("#the_resource_title").val(), q: $("#the_resource_data").val()}, function(data) {
-				  			alert(data);
-				  			window.location.reload(true);
- 					 }
-				);
-				return false;
-	}
-</script>
 
-<p><b>Latest status updates: </b><span class=sidenote>
+<p><h2><?php echo COLLAB_PROJECT_LATESTUPDATE; ?></h2><span class=sidenote>
 	
 	<?php
 	
 	if(mysql_num_rows(mysql_query('select * from projectmemberships where projectmembership_project_id = '.mysql_real_escape_string($_REQUEST['q']).' and projectmembership_user_id='.$_SESSION['user_id'])) > 0) {  ?>
 	
-	<a onClick=addNewThing()>+ new status update</a>
+	<a onClick=addNewThing()>+ <?php echo COLLAB_PROJECT_ADDUPDATE; ?></a>
 	
 	<?php
 	
@@ -107,13 +85,13 @@ while($status = mysql_fetch_assoc($statuss)) {
 <?php } ?>
 <br />
 
-<p><b>Resources:</b><span class=sidenote>
+<p><h2><?php echo COLLAB_PROJECT_RESOURCE; ?></h2></b><span class=sidenote>
 	
 	<?php
 	
 	if(mysql_num_rows(mysql_query('select * from projectmemberships where projectmembership_project_id = '.mysql_real_escape_string($_REQUEST['q']).' and projectmembership_user_id='.$_SESSION['user_id'])) > 0) {  ?>
 	
-	<a onClick=addNewResource()>+ new resource</a>
+	<a onClick=addNewResource()>+ <?php echo COLLAB_PROJECT_ADDRESOURCE; ?></a>
 	
 	<?php
 	
