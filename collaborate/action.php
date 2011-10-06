@@ -46,4 +46,29 @@ else if(isset($_REQUEST['newmilestone']) && $_REQUEST['newmilestone'] == true) {
 	mysql_query("insert into todolistmilestone (todolistmilestone_name, todolistmilestone_project_id, todolistmilestone_order) values ('$t',$p,$order)") or die(mysql_error());
 	
 } 
+
+else if(isset($_REQUEST['complete_task']) && $_REQUEST['complete_task'] == true) {
+	
+	$t = mysql_real_escape_string($_REQUEST['t']);
+	$s = mysql_real_escape_string($_REQUEST['s']);
+		
+	mysql_query("update todolist set todolist_status = $s where todolist_id=$t limit 1") or die(mysql_error());
+}
+else if(isset($_REQUEST['resort']) && $_REQUEST['resort'] == true) {
+	$i=0;
+	foreach($_REQUEST['milestone'] as $id) {
+		$id = mysql_real_escape_string($id);
+		mysql_query("update todolistmilestone set todolistmilestone_order=$i where todolistmilestone_id = $id limit 1") or die(mysql_error());
+		$i++;
+	} 
+	
+}
+else if(isset($_REQUEST['deletetask']) && $_REQUEST['deletetask'] == true) {
+		$id = mysql_real_escape_string($_REQUEST['id']);	
+		mysql_query("delete from todolist where todolist_id = $id limit 1") or die(mysql_error());
+		
+} 
+
+
+
 ?>

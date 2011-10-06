@@ -8,6 +8,7 @@ $user = mysql_query("select * from users where user_name = '$user_name' and user
 
 if(mysql_num_rows($user) == 1) {
 	$_SESSION['authenticated'] = "true";
+	$_SESSION['time'] = time();
 	$u = mysql_fetch_assoc($user);
 	foreach($u as $k => $v) $_SESSION[$k] = $v;
 	

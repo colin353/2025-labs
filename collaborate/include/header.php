@@ -8,9 +8,10 @@
 <meta name="author" content="Colin" />
 <!-- Date: 2011-09-29 -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/jquery-1.6.2.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/jquery-ui-1.8.16.custom.min.js"></script>
 
-<script src="js/bg_full.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bg_full.js"></script>
 			
 <link rel=stylesheet href="<?php echo BASE_URL; ?>style/style.css" />
 

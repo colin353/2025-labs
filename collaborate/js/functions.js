@@ -42,3 +42,21 @@ function newMilestoneSubmit(arg) {
 	);
 	return false;
 }
+
+function task_delete(cht) {
+		$.post(BASE_URL+'action.php',{deletetask: true, id : cht}, function(data) {
+	  			//alert(data);
+	  			window.location.reload(true);
+		 });
+}
+
+function chTask(cht) {
+	if($("#check"+cht).is(':checked'))  // Check'd
+		$("#task"+cht).css('text-decoration','line-through');
+	else $("#task"+cht).css('text-decoration','none');
+	
+	$.post(BASE_URL+'action.php',{complete_task: true, t:cht, s: $("#check"+cht).is(':checked')}, function(data) {
+	  			
+		 }
+	);
+}

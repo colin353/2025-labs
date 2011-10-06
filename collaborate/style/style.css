@@ -220,3 +220,14 @@ input.todolistforms {
 	margin-left: 20px;
 	width: 500px;
 }
+
+span.killer_queen {
+	float: right;	
+}
+span.killer_queen > a {
+	color: red;	
+}
+
+*.strike {
+	text-decoration: line-through;	
+}
