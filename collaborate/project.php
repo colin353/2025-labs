@@ -76,11 +76,11 @@ while($d = mysql_fetch_assoc($people)) {
 	
 <?php
 
-$statuss = mysql_query('select * from projectstatus,users where projectstatus_user_id = user_id and projectstatus_project_id = '.mysql_real_escape_string($_REQUEST['q']).' order by projectstatus_creationdate desc limit 0,3') or die(mysql_error());
+$statuss = mysql_query('select *,unix_timestamp(projectstatus_creationdate) as t from projectstatus,users where projectstatus_user_id = user_id and projectstatus_project_id = '.mysql_real_escape_string($_REQUEST['q']).' order by projectstatus_creationdate desc limit 0,3') or die(mysql_error());
 while($status = mysql_fetch_assoc($statuss)) {
 
 ?>
-<p><span><?php echo $status['projectstatus_status']; ?></span><span class=sidenote>-- <?php echo $status['user_realname']; ?>, about 15 minutes ago</span></p>
+<p><span><?php echo $status['projectstatus_status']; ?></span><span class=sidenote>-- <?php echo $status['user_realname']; ?>, <?php echo time_to_string(time()-$status['t']); ?></span></p>
 
 <?php } ?>
 <br />
