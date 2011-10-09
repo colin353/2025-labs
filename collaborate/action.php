@@ -69,6 +69,16 @@ else if(isset($_REQUEST['deletetask']) && $_REQUEST['deletetask'] == true) {
 		
 } 
 
-
+else if(isset($_REQUEST['deletemilestone']) && $_REQUEST['deletemilestone'] == true) {
+		$id = mysql_real_escape_string($_REQUEST['id']);	
+		mysql_query("delete from todolistmilestone where todolistmilestone_id = $id limit 1") or die(mysql_error());
+		
+} 
+else if(isset($_REQUEST['addmetoproject']) && $_REQUEST['addmetoproject'] == true) {
+		$pid = mysql_real_escape_string($_REQUEST['id']);	
+		$id = $_SESSION['user_id'];
+		$rol = mysql_real_escape_string($_REQUEST['rol']);
+		mysql_query("insert into projectmemberships (projectmembership_user_id, projectmembership_project_id,projectmembership_role) values ($id, $pid,'$rol')") or die(mysql_error());
+} 
 
 ?>

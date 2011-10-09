@@ -1,8 +1,9 @@
-<div id=content>
-
-<h1>Collaborate: to do list<span class=sidenote> <a onclick="$('#newmilestoneform').show('fast')">+ add new milestone</a></span></h1><br />
 
 
+<?php
+$header_sidenote = "<a onclick=\"$('#newmilestoneform').show('fast')\">+ add new milestone</a>"; 
+include('include/header-project.php'); ?>
+<br />
 <div id=newmilestoneform class=hiding><form onSubmit="return newMilestoneSubmit();">
 	<span>Milestone name:</span><input class=todolistforms type=text id=newmilestone placeholder="" />
 </form>
@@ -12,15 +13,15 @@
 <?php
 
 $miles = mysql_query('select * from todolistmilestone where todolistmilestone_project_id = '.mysql_real_escape_string($_REQUEST['q']).' order by todolistmilestone_order');
-$q =0;$script = ""; 
-while($m = mysql_fetch_assoc($miles)) {
-
-?>
-
+$q =0;$q2=0;$script = ""; 
+while($m = mysql_fetch_assoc($miles)) { ?>
 
 <div id=sortable>
 <div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class=milestone>
-	<span>Milestone: <b><?php echo $m['todolistmilestone_name']; ?></b> <span class=sidenote><a onClick="$('#newtaskform<?php echo $m['todolistmilestone_id'];?>').show('fast')">+ add new task</a></span></span>	
+	<?php 	$script .=	"me[".$q2++."] = " . $m['todolistmilestone_id'].";\n"; ?>
+	
+	
+	<span>Milestone: <b><?php echo $m['todolistmilestone_name']; ?></b> <span class=sidenote><a onClick="$('#newtaskform<?php echo $m['todolistmilestone_id'];?>').show('fast')">+ add new task</a></span></span>	<span class="hiding milekiller"><a href=# onClick="if(confirm('Are you for real?')) delete_milestone(<?php echo $m['todolistmilestone_id']; ?>)" >delete</a></span>
 	<div id=newtaskform<?php echo $m['todolistmilestone_id'];?> class=hiding>
 		<input type=checkbox /> 
 		<select id=select<?php echo $m['todolistmilestone_id'];?>>
@@ -61,14 +62,28 @@ while($m = mysql_fetch_assoc($miles)) {
 
 <script>
 		le = Array(<?php echo $q; ?>);
+		me = Array(<?php echo mysql_num_rows($miles);?>);
 		<?php echo $script; ?>
 		
+		
+		function dblClickMilestoneEvent(event) {
+				if(event.target.tagName == "DIV") {
+					$(event.target).children('.milekiller').toggle('fast');
+				} 	
+		}
+		
+		for(i=0;i<<?php echo $q2; ?>;i++) {
+			$("#milestone_"+me[i]).bind('dblclick',dblClickMilestoneEvent);			
+		}
+		
+		function dblClickTaskEvent(event) {
+				if(event.target.tagName == "DIV")  $(event.target).children('.killer_queen').toggle('fast');
+				else if(event.target.tagName == "B") $(event.target).parent().siblings('.killer_queen').toggle('fast');
+				else $(event.target).siblings('.killer_queen').toggle('fast');
+		}
+		
 		for(i=0;i<<?php echo $q; ?>;i++) {
-			$("#task"+le[i]).bind('dblclick',function(event) {
-				if(event.target.tagName == "DIV")  $(event.target).children('.killer_queen').show('fast');
-				else if(event.target.tagName == "B") $(event.target).parent().siblings('.killer_queen').show('fast');
-				else $(event.target).siblings('.killer_queen').show('fast');
-			});			
+			$("#task"+le[i]).bind('dblclick',dblClickTaskEvent);			
 		}
 
 		$('#sortable').sortable(

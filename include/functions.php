@@ -2,6 +2,12 @@
 
 include_once('defaults.php');
 
+
+function nope_chuck_testa() {
+	include('404.php');
+	exit;
+}
+
 function isAuthenticated() {
 	if(isset($_SESSION['authenticated']) && isset($_SESSION['time']) && $_SESSION['authenticated'] == "true" && time() - $_SESSION['time'] < 60*MINUTES_UNTIL_LOGOUT) {
 		$_SESSION['time'] = time();

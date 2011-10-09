@@ -50,6 +50,13 @@ function task_delete(cht) {
 		 });
 }
 
+function delete_milestone(cht) {
+		$.post(BASE_URL+'action.php',{deletemilestone: true, id : cht}, function(data) {
+	  			//alert(data);
+	  			window.location.reload(true);
+		 });
+}
+
 function chTask(cht) {
 	if($("#check"+cht).is(':checked'))  // Check'd
 		$("#task"+cht).css('text-decoration','line-through');
@@ -57,6 +64,14 @@ function chTask(cht) {
 	
 	$.post(BASE_URL+'action.php',{complete_task: true, t:cht, s: $("#check"+cht).is(':checked')}, function(data) {
 	  			
+		 }
+	);
+}
+
+function addMeToProject(q,r) {
+		$.post(BASE_URL+'action.php',{addmetoproject: true, id: q, rol : r}, function(data) {
+	  			
+	  			window.location.reload(true);
 		 }
 	);
 }

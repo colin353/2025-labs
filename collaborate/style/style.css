@@ -221,10 +221,11 @@ input.todolistforms {
 	width: 500px;
 }
 
-span.killer_queen {
+span.killer_queen,span.milekiller {
 	float: right;	
 }
-span.killer_queen > a {
+
+span.killer_queen > a,span.milekiller  > a {
 	color: red;	
 }
 

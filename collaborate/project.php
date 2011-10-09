@@ -1,32 +1,25 @@
 <?php
 
-function nope_chuck_testa() {
-	?>
-	<p>I bet you thought that was a real project ID.</p>
-	<h1>NOPE!</h1>
-	<p>-- Chuck Testa</p>
-	<?php
+$id = mysql_real_escape_string($_SESSION['user_id']);
+$q = mysql_real_escape_string($_REQUEST['q']);
+if(mysql_num_rows(mysql_query("select * from projectmemberships where projectmembership_user_id = $id and projectmembership_project_id = $q")) == 0 )
+	$header_sidenote = "<a href=# onClick=askToAddProj($q) >+ add me to this project</a>"; 	
+else $header_sidenote = '';
+
+include('include/header-project.php');
+
+?>
+
+<script>
+	function askToAddProj(q) {
+		var reply = prompt("What role will you play in this project?", "")
+		if(reply == null) return;
+		else addMeToProject(q,reply);
+	}
 	
-	return;
-}
+</script>
 
-if(!isset($_REQUEST['q'])) nope_chuck_testa();
-else {
-	$p = mysql_query('select * from projects where project_id = '.mysql_real_escape_string($_REQUEST['q']));	
-	if(mysql_num_rows($p) == 0) nope_chuck_testa();  
-	$p = mysql_fetch_assoc($p);
-} 
-?>
 
-<h1><?php echo $p['project_name']; ?></h1>
-<p><?php echo $p['project_description']; ?> </p>
-<?php 
-$k['to-do list'] = 'project-to-do/'.$_REQUEST['q'];
-$k['finances'] = 'finance/'.$_REQUEST['q'];
-displayActionMenu($k);
-
-?>
-<br />
 <p><h2><?php echo COLLAB_PROJECT_MEMBERS; ?></h2></p>
 
 <?php 
@@ -94,7 +87,7 @@ while($status = mysql_fetch_assoc($statuss)) {
 	<a onClick=addNewResource()>+ <?php echo COLLAB_PROJECT_ADDRESOURCE; ?></a>
 	
 	<?php
-	
+		
 	}
 	
 	?>
