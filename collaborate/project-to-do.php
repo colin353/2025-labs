@@ -20,7 +20,7 @@ $q =0;$q2=0;$script = "";
 while($m = mysql_fetch_assoc($miles)) { ?>
 
 <div id=sortable> 
-<div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class="milestone<?php if($pstat['next_id'] == $m['todolistmilestone_id']) echo ' milestone_current'; ?>"
+<div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class="milestone<?php if($pstat['next_id'] == $m['todolistmilestone_id']) echo ' milestone_current'; ?>" >
 	
 	<?php $script .= "me[".$q2++."] = ". $m['todolistmilestone_id'].";\n"; ?>
 	
