@@ -1,6 +1,6 @@
 <h1><?php echo greet(); ?> </h1>
 
-<p><h2>Recent company activity:</h2></p>
+<p><h2><?php echo DASH_RECENT; ?></h2></p>
 
 <?php
 

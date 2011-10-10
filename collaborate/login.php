@@ -12,6 +12,7 @@ if(mysql_num_rows($user) == 1) {
 	$u = mysql_fetch_assoc($user);
 	foreach($u as $k => $v) $_SESSION[$k] = $v;
 	
+	eventLog("logged in",$u['user_id']);
 }
 else {
 	header('Location: logout.php');

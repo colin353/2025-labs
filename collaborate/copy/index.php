@@ -29,6 +29,6 @@ define("INDEX_CONTACT", <<<EOT
 EOT
 );
 
-
+define("DASH_RECENT","Recent company activity:");
 
 ?>

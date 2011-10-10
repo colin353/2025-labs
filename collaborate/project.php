@@ -3,7 +3,7 @@
 $id = mysql_real_escape_string($_SESSION['user_id']);
 $q = mysql_real_escape_string($_REQUEST['q']);
 if(mysql_num_rows(mysql_query("select * from projectmemberships where projectmembership_user_id = $id and projectmembership_project_id = $q")) == 0 )
-	$header_sidenote = "<a href=# onClick=askToAddProj($q) >+ add me to this project</a>"; 	
+	$header_sidenote = "<a href=# onClick=askToAddProj($q) >+ ".COLLAB_PROJ_ADD_ME."</a>"; 	
 else $header_sidenote = '';
 
 include('include/header-project.php');
@@ -12,7 +12,7 @@ include('include/header-project.php');
 
 <script>
 	function askToAddProj(q) {
-		var reply = prompt("What role will you play in this project?", "")
+		var reply = prompt("<?php echo COLLAB_ROLE_Q; ?>", "")
 		if(reply == null) return;
 		else addMeToProject(q,reply);
 	}
@@ -27,7 +27,7 @@ $pstat = getProjectState($_REQUEST['q']);
 
 <p><h2><?php echo COLLAB_PROJECT_STATE; ?></h2> <?php echo $pstat['current']; ?></p>
 
-<span>Next milestone: <b><?php echo $pstat['next']; ?></b>, currently <?php echo $pstat['percentagecomplete']; ?>% complete</span><br />
+<span>Next milestone: <b><?php echo $pstat['next']; ?></b>, <?php echo COLLAB_PCTC1." ".$pstat['percentagecomplete']."% ".COLLAB_PCTC2; ?></span><br />
 <div id=progressbar> </div>
 
 <script>
@@ -58,7 +58,7 @@ $pstat = getProjectState($_REQUEST['q']);
 	
 <div id=new_status_update class=hiding>
 	<form onSubmit='return new_status();' >
-		<input type="text" value="" id=the_data placeholder="Status update here..." /><span class=sidenote>-- <?php echo $_SESSION['user_realname']; ?></span>		
+		<input type="text" value="" id=the_data placeholder="<?php echo COLLAB_PLACE_STATUS_P; ?>" /><span class=sidenote>-- <?php echo $_SESSION['user_realname']; ?></span>		
 		<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
 	</form>
 	
@@ -84,7 +84,7 @@ $people = mysql_query('select * from users,projectmemberships where projectmembe
 while($d = mysql_fetch_assoc($people)) {
 	
 	if($p['project_creator_id'] == $d['user_id']) {
-		$king = "project creator";
+		$king = COLLAB_PROJ_CREATOR;
 		if($d['projectmembership_role'] != "") $king = ", ".$king;
 	}
 	
@@ -118,7 +118,7 @@ while($d = mysql_fetch_assoc($people)) {
 </span></p>
 <div id=new_resource class=hiding>
 	<form onSubmit='return new_resource();' >
-		<input type="text" value="" id=the_resource_title placeholder="Resource title..." /><input type="text" value="" id=the_resource_data placeholder="Resource..." />		
+		<input type="text" value="" id=the_resource_title placeholder="<?php echo COLLAB_PROJ_RES; ?>" /><input type="text" value="" id=the_resource_data placeholder="<?php echo COLLAB_PROJ_RES2; ?>" />		
 		<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
 	</form>
 	
