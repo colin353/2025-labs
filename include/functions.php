@@ -70,6 +70,33 @@ function displayActionMenu($k) {
 <?php
 }
 
+function getProjectState($pid) {
+	$pid = mysql_real_escape_string($pid);
+	$ps = mysql_query("select *, ( (select count(*) from todolist where todolist_status = 1 and todolist_milestone_id = todolistmilestone_id) / (select count(*) from todolist where todolist_milestone_id = todolistmilestone_id))  as percentagecomplete
+				from todolistmilestone where todolistmilestone_project_id = $pid order by todolistmilestone_order asc") or die(mysql_error());
+	
+	
+	$res['current'] = "initial development";
+	$res['next_id'] = 0; 
+	$res['curr_id'] = 0;
+	while($m = mysql_fetch_assoc($ps)) {
+		if($m['percentagecomplete'] == 1) {
+			$res['current'] = $m['todolistmilestone_name'];
+			$res['curr_id'] = $m['todolistmilestone_id'];
+		}
+		else {
+			 $res['next'] = $m['todolistmilestone_name'];
+			 $res['percentagecomplete'] = round(100*$m['percentagecomplete']);
+			 $res['next_id'] = $m['todolistmilestone_id'];
+			 return $res;
+			 break;
+		}				
+	}
+	
+	return $res;
+				
+}
+
 
 
 ?>

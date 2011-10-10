@@ -1,6 +1,9 @@
 
 
 <?php
+
+$pstat = getProjectState($_REQUEST['q']);
+
 $header_sidenote = "<a onclick=\"$('#newmilestoneform').show('fast')\">+ add new milestone</a>"; 
 include('include/header-project.php'); ?>
 <br />
@@ -16,8 +19,9 @@ $miles = mysql_query('select * from todolistmilestone where todolistmilestone_pr
 $q =0;$q2=0;$script = ""; 
 while($m = mysql_fetch_assoc($miles)) { ?>
 
-<div id=sortable>
-<div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class=milestone>
+<div id=sortable> 
+<div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class="milestone<?php if($pstat['next_id'] == $m['todolistmilestone_id']) echo ' milestone_current'; ?>"
+	
 	<?php 	$script .=	"me[".$q2++."] = " . $m['todolistmilestone_id'].";\n"; ?>
 	
 	

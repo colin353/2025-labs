@@ -16,5 +16,6 @@ define("COLLAB_PROJECT_ADDUPDATE","new status update");
 define("COLLAB_PROJECT_RESOURCE","Resources:");
 define("COLLAB_PROJECT_ADDRESOURCE","new resource");
 
+define("COLLAB_PROJECT_STATE","Project state:");
 
 ?>

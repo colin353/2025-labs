@@ -19,27 +19,24 @@ include('include/header-project.php');
 	
 </script>
 
-
-<p><h2><?php echo COLLAB_PROJECT_MEMBERS; ?></h2></p>
-
 <?php 
 
-$people = mysql_query('select * from users,projectmemberships where projectmembership_user_id = user_id');
-
-while($d = mysql_fetch_assoc($people)) {
-	
-	if($p['project_creator_id'] == $d['user_id']) $king = ", project creator";
-	else $king = "";
-	
-	?>
-	
-	<h3><a href=<?php echo BASE_URL; ?>person/<?php echo $d['user_id']; ?>><?php echo $d['user_realname']; ?></a><span class=sidenote><?php echo $d['projectmembership_role'].$king; ?></span></h3>
-	
-	
-	<?php
-}
+$pstat = getProjectState($_REQUEST['q']);
 
 ?>
+
+<p><h2><?php echo COLLAB_PROJECT_STATE; ?></h2> <?php echo $pstat['current']; ?></p>
+
+<span>Next milestone: <b><?php echo $pstat['next']; ?></b>, currently <?php echo $pstat['percentagecomplete']; ?>% complete</span><br />
+<div id=progressbar> </div>
+
+<script>
+	    $(document).ready(function() {
+  		  $("#progressbar").progressbar({ value: <?php echo $pstat['percentagecomplete']; ?> });
+  		});
+</script>
+
+
 <br />
 
 
@@ -76,8 +73,30 @@ while($status = mysql_fetch_assoc($statuss)) {
 <p><span><?php echo $status['projectstatus_status']; ?></span><span class=sidenote>-- <?php echo $status['user_realname']; ?>, <?php echo time_to_string(time()-$status['t']); ?></span></p>
 
 <?php } ?>
-<br />
 
+<br />
+<p><h2><?php echo COLLAB_PROJECT_MEMBERS; ?></h2></p>
+
+<?php 
+
+$people = mysql_query('select * from users,projectmemberships where projectmembership_user_id = user_id');
+
+while($d = mysql_fetch_assoc($people)) {
+	
+	if($p['project_creator_id'] == $d['user_id']) $king = ", project creator";
+	else $king = "";
+	
+	?>
+	
+	<h3><a href=<?php echo BASE_URL; ?>person/<?php echo $d['user_id']; ?>><?php echo $d['user_realname']; ?></a><span class=sidenote><?php echo $d['projectmembership_role'].$king; ?></span></h3>
+	
+	
+	<?php
+}
+
+?>
+
+<br />
 <p><h2><?php echo COLLAB_PROJECT_RESOURCE; ?></h2></b><span class=sidenote>
 	
 	<?php
