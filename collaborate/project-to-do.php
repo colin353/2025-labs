@@ -22,7 +22,7 @@ while($m = mysql_fetch_assoc($miles)) { ?>
 <div id=sortable> 
 <div id=milestone_<?php echo $m['todolistmilestone_id']; ?> class="milestone<?php if($pstat['next_id'] == $m['todolistmilestone_id']) echo ' milestone_current'; ?>"
 	
-	<?php 	$script .=	"me[".$q2++."] = " . $m['todolistmilestone_id'].";\n"; ?>
+	<?php $script .= "me[".$q2++."] = ". $m['todolistmilestone_id'].";\n"; ?>
 	
 	
 	<span>Milestone: <b><?php echo $m['todolistmilestone_name']; ?></b> <span class=sidenote><a onClick="$('#newtaskform<?php echo $m['todolistmilestone_id'];?>').show('fast')">+ add new task</a></span></span>	<span class="hiding milekiller"><a href=# onClick="if(confirm('Are you for real?')) delete_milestone(<?php echo $m['todolistmilestone_id']; ?>)" >delete</a></span>
@@ -40,7 +40,7 @@ while($m = mysql_fetch_assoc($miles)) { ?>
 	</b></span>
 	</div>
 	<?php 
-		$tos = mysql_query('select * from todolist where todolist_milestone_id = '.$m['todolistmilestone_id']); 
+		$tos = mysql_query('select * from todolist where todolist_milestone_id = '.$m['todolistmilestone_id'].' order by todolist_status,todolist_created'); 
 		
 		while($t = mysql_fetch_assoc($tos)) {
 		if($t['todolist_user_id'] == 0) $tusername = "somebody";

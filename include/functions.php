@@ -97,6 +97,18 @@ function getProjectState($pid) {
 				
 }
 
+function eventLog($t,$id=0,$pid=0) {
+	if($pid == null) $pid = 0;
+	if($id == null) $id = 0;
+	$t = mysql_real_escape_string($t);
+	$pid = mysql_real_escape_string($pid);
+	$id = mysql_real_escape_string($id);
+	$uid = $_SESSION['user_id'];
+	
+	mysql_query("insert into events (event_text, event_user_id, event_project_id, event_relevant_id) values ('$t',$uid,$pid,$id)") or die(mysql_error());
+	
+}
+
 
 
 ?>
