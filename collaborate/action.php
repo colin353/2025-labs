@@ -93,5 +93,19 @@ else if(isset($_REQUEST['addmetoproject']) && $_REQUEST['addmetoproject'] == tru
 		mysql_query("insert into projectmemberships (projectmembership_user_id, projectmembership_project_id,projectmembership_role) values ($id, $pid,'$rol')") or die(mysql_error());
 		eventLog("added themselves as a member",mysql_insert_id(),$pid); // working
 } 
+else if(isset($_REQUEST['create']) && $_REQUEST['create'] == "true") {
+		$project_name = mysql_real_escape_string($_REQUEST['project_name']);
+		$project_description = mysql_real_escape_string($_REQUEST['project_description']);
+		$project_salespitch = mysql_real_escape_string($_REQUEST['project_salespitch']);
+		$project_unique = mysql_real_escape_string($_REQUEST['project_unique']);
+		$project_owner = $_SESSION['user_id'];
+		
+		mysql_query("insert into projects (project_name,project_description,project_salespitch,project_unique,project_creator_id) values('$project_name','$project_description','$project_salespitch',$project_unique,$project_owner)") or die(mysql_error());
+		eventLog("created a project",$i=mysql_insert_id(),mysql_insert_id());
+		
+		mysql_query("insert into projectmemberships (projectmembership_project_id,projectmembership_user_id) values (".$i.",$project_owner)") or die(mysql_error());
+		header("Location: ".BASE_URL."projects");
+}
+
 
 ?>

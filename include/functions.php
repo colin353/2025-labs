@@ -77,6 +77,8 @@ function getProjectState($pid) {
 	
 	
 	$res['current'] = "initial development";
+	$res['next'] = "initial development";
+	$res['percentagecomplete'] = 0;
 	$res['next_id'] = 0; 
 	$res['curr_id'] = 0;
 	while($m = mysql_fetch_assoc($ps)) {
@@ -106,6 +108,20 @@ function eventLog($t,$id=0,$pid=0) {
 	$uid = $_SESSION['user_id'];
 	
 	mysql_query("insert into events (event_text, event_user_id, event_project_id, event_relevant_id) values ('$t',$uid,$pid,$id)") or die(mysql_error());
+	
+}
+
+function greet() {
+		$gc = 0;
+		$greets[$gc++] = "Good to see you";
+		$greets[$gc++] = "Welcome back";
+		$greets[$gc++] = "Well hello";
+		$greets[$gc++] = "Ahoy";
+		$greets[$gc++] = "The prodigal son returns";
+		if(date("a") == "pm") $greets[$gc++] = "Good afternoon";
+		else $greets[$gc++] = "Good morning";
+		
+		return $greets[rand(0,$gc-1)].", ".getFirstName($_SESSION['user_realname']).".";
 	
 }
 

@@ -79,11 +79,15 @@ while($status = mysql_fetch_assoc($statuss)) {
 
 <?php 
 
-$people = mysql_query('select * from users,projectmemberships where projectmembership_user_id = user_id');
+$people = mysql_query('select * from users,projectmemberships where projectmembership_project_id = '.mysql_real_escape_string($_REQUEST['q']).' and projectmembership_user_id = user_id');
 
 while($d = mysql_fetch_assoc($people)) {
 	
-	if($p['project_creator_id'] == $d['user_id']) $king = ", project creator";
+	if($p['project_creator_id'] == $d['user_id']) {
+		$king = "project creator";
+		if($d['projectmembership_role'] != "") $king = ", ".$king;
+	}
+	
 	else $king = "";
 	
 	?>

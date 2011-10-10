@@ -6,7 +6,7 @@ $projects = mysql_query('select * from projects limit 0,10')
 ?>
 
 
-<p><?php echo COLLAB_PROJECTS_SEARCH; ?></p><br />
+<p><?php echo COLLAB_PROJECTS_SEARCH; ?><span class=sidenote><a href=<?php echo BASE_URL; ?>new-project >+ add new project</a> </span></p><br />
 
 <?php
 
