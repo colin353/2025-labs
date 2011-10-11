@@ -41,6 +41,10 @@ function time_to_string($td) {
    
 }
 
+function format_dollars($number) {
+	return "$".number_format($number,2);
+}
+
 function truncate_string($str,$char) {
     if(strlen($str) > $char) {
         $story = substr($str,0,$char-3);

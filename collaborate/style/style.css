@@ -272,4 +272,19 @@ form.inputForm > textarea.big {
 	height: 300px;	
 }
 
-form.
+div.fund_request {
+		background-color: #EEEEEE;
+		width: 600px;
+		margin-top: 20px;
+		padding: 5px;
+		padding-left: 20px;
+}
+
+div.fund_request > div.percent {
+	margin: 15px;
+	float: right;	
+}
+
+div.fund_request_complete {
+	background-color: #EEFFEE;	
+}
