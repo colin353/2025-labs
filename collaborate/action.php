@@ -104,6 +104,9 @@ else if(isset($_REQUEST['create']) && $_REQUEST['create'] == "true") {
 		eventLog("created a project",$i=mysql_insert_id(),mysql_insert_id());
 		
 		mysql_query("insert into projectmemberships (projectmembership_project_id,projectmembership_user_id) values (".$i.",$project_owner)") or die(mysql_error());
+		
+		mysql_query("insert into accounts (account_owner_id,account_type) values ($i,'project')");
+		
 		header("Location: ".BASE_URL."projects");
 }
 
