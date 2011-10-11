@@ -7,8 +7,6 @@ define("COLLAB_PROJECTS_ENTRY2","Account value: ");
 define("COLLAB_PROJECTS_ENTRY3","Description: ");
 define("COLLAB_PROJECTS_ENTRY4","People involved: ");
 
-
-
 define("COLLAB_PROJECT_MEMBERS","People involved:");
 define("COLLAB_PROJECT_LATESTUPDATE","Latest status updates:");
 define("COLLAB_PROJECT_ADDUPDATE","new status update");
@@ -44,4 +42,8 @@ define("COLLAB_NEW_PROJ_PITCH2","Explanation of why 2025 should participate in t
 define("COLLAB_NEW_PROJ_DESC2","Brief description of the project.");
 define("COLLAB_NEW_PROJ_TITLE2","Title of the project.");
 define("COLLAB_NEW_PROJ_GO","Create Project");
+
+
+define("COLLAB_FINANCE_PROJ","Funding Requests");
+define("COLLAB_FINANCE_PROJ_NEWFUND","new funding request");
 ?>
