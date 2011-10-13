@@ -6,6 +6,10 @@ body { margin: 0; padding: 0; }
 .bgwidth { width: 100%; }
 .bgheight { height: 100%; }
 
+#slind {
+	font-size: 18pt;	
+}
+
 /* Background and header style */
 
 @font-face {

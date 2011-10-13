@@ -1,3 +1,4 @@
+<?php include("include/widgets.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
 
@@ -11,6 +12,8 @@
 <script src="<?php echo BASE_URL; ?>js/jquery-1.6.2.min.js"></script>
 <script src="<?php echo BASE_URL; ?>js/jquery-ui-1.8.16.custom.min.js"></script>
 <script src="<?php echo BASE_URL; ?>js/bg_full.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 <link rel=stylesheet href="<?php echo BASE_URL; ?>css/ui-lightness/jquery-ui-1.8.16.custom.css" />
 			
 <link rel=stylesheet href="<?php echo BASE_URL; ?>style/style.css" />

@@ -41,6 +41,13 @@ function time_to_string($td) {
    
 }
 
+function myQuery($q,$debug = false) {
+	if($debug) echo $q;
+	$qr = mysql_query($q) or die(mysql_error());
+	return mysql_fetch_assoc($qr);
+	
+}
+
 function format_dollars($number) {
 	return "$".number_format($number,2);
 }
@@ -126,6 +133,23 @@ function greet() {
 		else $greets[$gc++] = "Good morning";
 		
 		return $greets[rand(0,$gc-1)].", ".getFirstName($_SESSION['user_realname']).".";
+	
+}
+
+function myBalance() {
+	$u = $_SESSION['user_id'];
+	
+	$balance = 0;
+	
+	$debits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_d.account_owner_id = $u and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_d.account_type = 'shareholder'"));
+	
+	$balance += $debits['t'];
+	
+	$credits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_c.account_owner_id = $u and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_c.account_type = 'shareholder'"));
+	
+	$balance -= $credits['t'];
+	
+	return $balance;
 	
 }
 

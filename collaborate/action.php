@@ -109,6 +109,48 @@ else if(isset($_REQUEST['create']) && $_REQUEST['create'] == "true") {
 		
 		header("Location: ".BASE_URL."projects");
 }
-
+else if(isset($_REQUEST['fundrequest']) && $_REQUEST['fundrequest'] == 'true') {
+		$r = mysql_real_escape_string($_REQUEST['r']);	
+		$u = $_SESSION['user_id'];
+		$a = mysql_real_escape_string($_REQUEST['a']);
+		$code = mysql_real_escape_string($_REQUEST['code']);
+		$total = $a;
+		
+		
+		$freq = myQuery("select * from fundingrequests where fundingrequest_id = $r");
+		$d = $freq['fundingrequest_debtor'];
+		$note = 'funding a funding request';
+		if(myBalance() >= $a) { // If we can afford it using our shareholder account only...
+		
+			$freq = myQuery("select * from accounts where account_type = 'shareholder' and account_owner_id = $u");
+			$c = $freq['account_id'];
+			mysql_query("insert into transactions (transaction_debtor, transaction_creditor, transaction_note, transaction_fundingrequest_id,transaction_value,transaction_code) values ($d, $c, '$note', $r, $a,'$code')") or die(mysql_error());
+			$insert_id = mysql_insert_id();		
+			$acc = myQuery("select * from accounts where account_id = $d");
+			$pid = $acc['account_owner_id'];
+			eventLog("funded a project",$insert_id,$pid); // working
+		} else {
+			$a = myBalance();
+			$freq = myQuery("select * from accounts where account_type = 'shareholder' and account_owner_id = $u");
+			$c = $freq['account_id'];
+			mysql_query("insert into transactions (transaction_debtor, transaction_creditor, transaction_note, transaction_fundingrequest_id,transaction_value,transaction_code) values ($d, $c, '$note', $r, $a,'$code')") or die(mysql_error());
+			$insert_id = mysql_insert_id();		
+			$acc = myQuery("select * from accounts where account_id = $d");
+			$pid = $acc['account_owner_id'];
+			eventLog("funded a request",$insert_id,$pid); // working
+			$a = $total - $a;
+			$code = md5($code);
+			$freq = myQuery("select * from accounts where account_type = 'pocket' and account_owner_id = $u");
+			$c = $freq['account_id'];
+			mysql_query("insert into transactions (transaction_debtor, transaction_creditor, transaction_note, transaction_fundingrequest_id,transaction_value,transaction_code) values ($d, $c, '$note', $r, $a,'$code')") or die(mysql_error());
+			$insert_id = mysql_insert_id();		
+			$acc = myQuery("select * from accounts where account_id = $d");
+			$pid = $acc['account_owner_id'];
+			eventLog("funded a request from his own pocket",$insert_id,$pid); // working
+						
+		}
+		
+		
+} 
 
 ?>
