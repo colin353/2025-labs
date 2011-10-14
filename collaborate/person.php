@@ -11,7 +11,7 @@ else {
 
 <h1><?php echo $u['user_realname']?><span class=sidenote>(aka <?php echo $u['user_name']; ?>)</span></h1>
 <p><b><?php echo COLLAB_PERSON_ENTRY1;?></b> <span><?php echo date('F jS Y',strtotime($u['user_creationdate'])); ?> </span></p>
-<p><b><?php echo COLLAB_PERSON_ENTRY2;?></b> <span> $100 </span></p>
+<p><b><?php echo COLLAB_PERSON_ENTRY2;?></b> <span> <?php echo format_dollars(myBalance($u['user_id'])); ?> </span></p>
 <br />
 <h1><?php echo getFirstName($u['user_realname']) . COLLAB_PERSON_THEIR; ?></h1>
 

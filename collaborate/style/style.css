@@ -257,22 +257,22 @@ font-family: Bits, 'Arial';
 }
 
 form.inputForm > input {
-
-	font-size: 20px;	
+	font-size: 15px;	
 }
 
-form.inputForm > input[type="text"] {
+form.inputForm > input[type="text"], form.inputForm * input[type="text"] {
 	height: 20px;
+	font-size: 15pt;
 	width: 600px;	
 }
 
-form.inputForm > textarea {
+form.inputForm > textarea, form.inputForm * textarea {
 	height: 100px;
 	width: 600px;	
 	font-size: 20px;
 }
 
-form.inputForm > textarea.big {
+form.inputForm > textarea.big,form.inputForm * textarea.big  {
 	height: 300px;	
 }
 
@@ -292,3 +292,5 @@ div.fund_request > div.percent {
 div.fund_request_complete {
 	background-color: #EEFFEE;	
 }
+
+

@@ -78,7 +78,7 @@ function addMeToProject(q,r) {
 
 function fundRequest(req,amt,securityCode) {
 		$.post(BASE_URL+'action.php',{fundrequest: true, r: req, a: amt,code :securityCode}, function(data) {
-	  			alert(data);
+	  			//alert(data);
 	  			window.location.reload(true);
 		 }
 	);

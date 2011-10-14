@@ -47,4 +47,12 @@ define("COLLAB_NEW_PROJ_GO","Create Project");
 define("COLLAB_FINANCE_PROJ","Funding Requests: ");
 define("COLLAB_FINANCE_PROJ_NEWFUND","new funding request");
 define("COLLAB_FINANCE_FU","new funding request");
+
+
+define("COLLAB_NEW_PROJ_FUND_DESC","Describe this funding request:");
+define("COLLAB_NEW_PROJ_FUND_DESC2","Funding request description.");
+define("COLLAB_NEW_PROJ_FUND_VAL","Value requested:");
+define("COLLAB_NEW_PROJ_FUND_VAL2","$12.00");
+define("COLLAB_NEW_PROJ_FUND_GO","Create Funding Request");
+
 ?>

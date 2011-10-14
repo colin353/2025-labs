@@ -25,8 +25,11 @@ include('include/header-project.php');
 	  
 	  
       $invs = mysql_query($myQuery = " SELECT * , sum( transaction_value ) as t FROM users,accounts as ac_d, accounts as ac_c,transactions WHERE ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and user_id = ac_c.account_owner_id and ac_d.account_owner_id = $q and ac_d.account_type = 'project' and ac_c.account_type = 'pocket' GROUP BY transaction_creditor      ") or die(mysql_error());
+      $invest2 = myQuery("select sum(transaction_value) as t from accounts as ac_d, accounts as ac_c, transactions where transaction_creditor = ac_c.account_id and transaction_debtor = ac_d.account_id and ac_c.account_type = 'shareholder' and ac_d.account_type = 'project' and ac_d.account_owner_id = $q");
+     
+    	
     //  echo $myQuery;
-      $script = ""; $thisfirst = true;
+      $script = "['2025',".$invest2['t']."]"; $thisfirst = false;
 	  while($i = mysql_fetch_assoc($invs)) {
 	  		if($thisfirst) $thisfirst = false;
 			else $script .= ",\n";
@@ -76,7 +79,7 @@ include('include/header-project.php');
 <br />
 <br />
 
-<h2><?php echo COLLAB_FINANCE_PROJ; ?></h2> <?php echo "<a href=# onClick=askToAddProj($q) >+ ".COLLAB_FINANCE_PROJ_NEWFUND."</a>"; ?>
+<h2><?php echo COLLAB_FINANCE_PROJ; ?></h2> <?php echo "<a href=".BASE_URL."new-fund-request/$q >+ ".COLLAB_FINANCE_PROJ_NEWFUND."</a>"; ?>
 
 <?php 
 
@@ -92,7 +95,9 @@ while($f = mysql_fetch_assoc($funds)) {
 	$total_raised += $f['transaction_value'];
 }
 
-if($total_raised >= $r['fundingrequest_value']) {
+$perfund = round(100*$total_raised / $r['fundingrequest_value'],4);
+
+if($perfund == 100) {
 	$coststr = format_dollars($total_raised);
 	$costpref = "Cost: ";
 }  
@@ -100,8 +105,6 @@ else {
 	$coststr = format_dollars($r['fundingrequest_value']-$total_raised) . " / " . format_dollars($r['fundingrequest_value']);
 	$costpref = "Still needed: ";
 }
-$perfund = 100*$total_raised / $r['fundingrequest_value'];
-
 ?>
 
 <div id=fund_request<?php echo $r['fundingrequest_id']; ?> class="fund_request <?php if($perfund == 100) echo 'fund_request_complete';?>">

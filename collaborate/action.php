@@ -152,5 +152,19 @@ else if(isset($_REQUEST['fundrequest']) && $_REQUEST['fundrequest'] == 'true') {
 		
 		
 } 
+else if(isset($_REQUEST['fund_req']) && $_REQUEST['fund_req'] == "true") {
+	foreach(array('q','desc','val','project_unique') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);		
+	$u = $_SESSION['user_id'];
+	echo $val."<br />";
+	$val = str_replace(array('$',',',' '),'',$val)."<br />";
+	$val = floatval($val);
+	echo $val;
+	if($val == 0) header("location: ".BASE_URL."new-fund-request/".$q);
+		
+	$debtor = myQuery("select account_id from accounts where account_type = 'project' and account_owner_id = $q");
+	$debtor = $debtor['account_id'];
+	mysql_query("insert into fundingrequests (fundingrequest_description,fundingrequest_creator_id,fundingrequest_value,fundingrequest_debtor) values ('$desc',$u,$val,$debtor)") or die(mysql_error());
+	header("location: ".BASE_URL."funding-requests/".$q);
+}
 
 ?>

@@ -136,8 +136,8 @@ function greet() {
 	
 }
 
-function myBalance() {
-	$u = $_SESSION['user_id'];
+function myBalance($u=0) {
+	if($u ==0) $u = $_SESSION['user_id'];
 	
 	$balance = 0;
 	
@@ -153,6 +153,9 @@ function myBalance() {
 	
 }
 
+function projBalance($p) {
+		
+}
 
 
 ?>
