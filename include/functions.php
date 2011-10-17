@@ -154,6 +154,79 @@ function myBalance($u=0) {
 }
 
 function projBalance($p) {
+	$balance = 0;
+	
+	$debits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_d.account_owner_id = $p and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_d.account_type = 'project'"));
+	
+	$balance += $debits['t'];
+	
+	$credits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_c.account_owner_id = $p and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_c.account_type = 'project'"));
+	
+	$balance -= $credits['t'];
+	
+	return $balance;
+}
+
+function balance_the_books($p, $val,$code) {
+		// The function for accepting and redistributing project income
+		
+		$p_a = myQuery("select account_id from accounts where account_type = 'project' and account_owner_id = $p");
+		$p_a = $p_a['account_id'];
+		
+		// Project has debts?
+		
+	     $debits = mysql_query($queros="select *,sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_d.account_owner_id = $p and ac_d.account_type = 'project' and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_c.account_type = 'pocket' group by ac_c.account_owner_id");
+		 //echo $queros."<br />";
+		$credits = mysql_query($queros="select *,sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_c.account_owner_id = $p and ac_c.account_type = 'project' and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_d.account_type = 'pocket' group by ac_d.account_owner_id");
+		 //echo $queros;
+		 
+		 
+		 while($d = mysql_fetch_assoc($debits)) $book[''.$d['transaction_creditor']] = $d['t'];	
+		 while($c = mysql_fetch_assoc($credits)) {
+		 	if(isset($book[''.$c['transaction_creditor']]))	$book[''.$c['transaction_debtor']] += $c['t'];
+			else $book[''.$c['transaction_creditor']] = -$c['t'];
+		 }
+		 $debt_sum = 0;
+		 foreach($book as $e) $debt_sum += $e;
+		 $kickback = 0;
+		 if($val > $debt_sum) { // If we can actually pay back all our debts, do it
+		 	$kickback = $val - $debt_sum;
+		 	$val = $debt_sum;
+		 } 
+		 
+		
+		 		 
+		 foreach($book as $k => $e) {
+		 		// Pay back the individual players
+		 		
+		 		$payback = ($e / $debt_sum)*$val; // pay back the correct fraction of the income
+		 		if(round($payback,2) == 0) continue; // if that fraction is zero, done
+		 		
+		 		$code = md5($code);
+				$note = "project paying off debts owed to members";		 		
+		 		//	Send money from the project account into the user account
+		 		mysql_query ("insert into transactions (transaction_debtor,transaction_creditor,transaction_note,transaction_value,transaction_code) 
+		 							values ($k,$p_a,'$note',$payback,'$code')") or die(mysql_error());
+		 		
+		 }
+
+		if($kickback != 0) {
+				
+			$shareholders = mysql_query("select * from accounts where account_type = 'shareholder'");
+			
+			$kickback = $kickback / mysql_num_rows($shareholders);
+			
+			while($s = mysql_fetch_assoc($shareholders)) {
+				$u_a = $s['account_id'];
+			 	$code = md5($code);
+			
+			 	$note = 'project generated extra money, have some kickback';
+				mysql_query ("insert into transactions (transaction_debtor, transaction_creditor, transaction_note, transaction_value, transaction_code) 
+						values ($u_a, $p_a, '$note',$kickback,'$code')") or die(mysql_error());
+				
+			}
+			
+		}
 		
 }
 

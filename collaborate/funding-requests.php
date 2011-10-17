@@ -3,7 +3,7 @@
 <?php 
 
 $q = mysql_real_escape_string($_REQUEST['q']);
-$header_sidenote = '';
+$header_sidenote = '<a href='.BASE_URL.'income-report/'.$q.'>+ add new income report</a>';
 
 include('include/header-project.php');
 
@@ -22,18 +22,20 @@ include('include/header-project.php');
       // First, let's query the appropriate data. Then we'll throw it into the JS.
       $q = mysql_real_escape_string($_REQUEST['q']);
 	  
-	  
-	  
       $invs = mysql_query($myQuery = " SELECT * , sum( transaction_value ) as t FROM users,accounts as ac_d, accounts as ac_c,transactions WHERE ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and user_id = ac_c.account_owner_id and ac_d.account_owner_id = $q and ac_d.account_type = 'project' and ac_c.account_type = 'pocket' GROUP BY transaction_creditor      ") or die(mysql_error());
+      $invs2 =  mysql_query($myQuery = " SELECT * , sum( transaction_value ) as t FROM accounts as ac_d, accounts as ac_c,transactions WHERE ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_c.account_owner_id = $q and ac_c.account_type = 'project' and ac_d.account_type = 'pocket' GROUP BY transaction_debtor") or die(mysql_error());
+
       $invest2 = myQuery("select sum(transaction_value) as t from accounts as ac_d, accounts as ac_c, transactions where transaction_creditor = ac_c.account_id and transaction_debtor = ac_d.account_id and ac_c.account_type = 'shareholder' and ac_d.account_type = 'project' and ac_d.account_owner_id = $q");
      
+	  while($i = mysql_fetch_assoc($invs2)) $books[''.$i['transaction_debtor']] = $i['t'];
     	
     //  echo $myQuery;
-      $script = "['2025',".$invest2['t']."]"; $thisfirst = false;
+      if(isset($invest2['t'])) $script = "['2025',".$invest2['t']."]";
+	  else $script = "['2025',0.00001]";
+	  
 	  while($i = mysql_fetch_assoc($invs)) {
-	  		if($thisfirst) $thisfirst = false;
-			else $script .= ",\n";
-	  		$script .= "['".$i['user_name']."',".round($i['t'],2)."]";
+	   	if(isset($books[''.$i['transaction_creditor']])) $i['t'] -= $books[''.$i['transaction_creditor']];
+		$script .= ",['".$i['user_name']."',".round($i['t'],2)."]";
 	  }
       
       ?>
@@ -116,7 +118,6 @@ else {
 	<p <?php if($perfund == 100) echo 'class=hiding';?>><b>Description: </b></p>
 	<p <?php if($perfund == 100) echo 'class=hiding';?>><?php echo $r['fundingrequest_description']; ?></p>
 	
-	<!--p><b>Funders:</b> Colin, Matt</p-->
 </div>
 
 <?php } ?>
