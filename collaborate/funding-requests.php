@@ -27,16 +27,25 @@ include('include/header-project.php');
 
       $invest2 = myQuery("select sum(transaction_value) as t from accounts as ac_d, accounts as ac_c, transactions where transaction_creditor = ac_c.account_id and transaction_debtor = ac_d.account_id and ac_c.account_type = 'shareholder' and ac_d.account_type = 'project' and ac_d.account_owner_id = $q");
      
-	  while($i = mysql_fetch_assoc($invs2)) $books[''.$i['transaction_debtor']] = $i['t'];
+	  while($i = mysql_fetch_assoc($invs2)) {
+	  	$books[''.$i['transaction_debtor']] = $i['t'];
+	  	$invest2['t'] += $i['t'];
+	  }
     	
     //  echo $myQuery;
       if(isset($invest2['t'])) $script = "['2025',".$invest2['t']."]";
 	  else $script = "['2025',0.00001]";
 	  
+	  $f = true;
+	  
 	  while($i = mysql_fetch_assoc($invs)) {
 	   	if(isset($books[''.$i['transaction_creditor']])) $i['t'] -= $books[''.$i['transaction_creditor']];
-		$script .= ",['".$i['user_name']."',".round($i['t'],2)."]";
+		if(round($i['t'],2) != 0) {
+			$script .= ",['".$i['user_name']."',".round($i['t'],2)."]";
+			$f= false;
+		}
 	  }
+	  
       
       ?>
       

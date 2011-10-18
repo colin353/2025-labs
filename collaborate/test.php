@@ -1,3 +1,3 @@
 <?php 
-balance_the_books(5,100,md5(rand().rand())); 
+balance_the_books(5,0,md5(rand().rand())); 
 ?>

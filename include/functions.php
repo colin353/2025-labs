@@ -183,9 +183,13 @@ function balance_the_books($p, $val,$code) {
 		 
 		 while($d = mysql_fetch_assoc($debits)) $book[''.$d['transaction_creditor']] = $d['t'];	
 		 while($c = mysql_fetch_assoc($credits)) {
-		 	if(isset($book[''.$c['transaction_creditor']]))	$book[''.$c['transaction_debtor']] += $c['t'];
-			else $book[''.$c['transaction_creditor']] = -$c['t'];
+		 	if(isset($book[''.$c['transaction_debtor']]))	$book[''.$c['transaction_debtor']] -= $c['t'];
+			else $book[''.$c['transaction_debtor']] = -$c['t'];
 		 }
+		 
+		 print_r($book);
+		 //return;
+		 		 
 		 $debt_sum = 0;
 		 foreach($book as $e) $debt_sum += $e;
 		 $kickback = 0;

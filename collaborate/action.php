@@ -164,6 +164,9 @@ else if(isset($_REQUEST['fund_req']) && $_REQUEST['fund_req'] == "true") {
 	$debtor = myQuery("select account_id from accounts where account_type = 'project' and account_owner_id = $q");
 	$debtor = $debtor['account_id'];
 	mysql_query("insert into fundingrequests (fundingrequest_description,fundingrequest_creator_id,fundingrequest_value,fundingrequest_debtor) values ('$desc',$u,$val,$debtor)") or die(mysql_error());
+	
+	
+	eventLog("created a new funding request",mysql_insert_id(),$q); // untested
 	header("location: ".BASE_URL."funding-requests/".$q);
 }
 else if(isset($_REQUEST['income_report']) && $_REQUEST['income_report'] == "true") {
@@ -187,6 +190,10 @@ else if(isset($_REQUEST['income_report']) && $_REQUEST['income_report'] == "true
 	header("location: ".BASE_URL."funding-requests/".$q);
 	
 	balance_the_books($q,$val,$project_unique);
+	
+	
+	eventLog("reported a new income",mysql_insert_id(),$q); // untested
+	eventLog("balanced some books",mysql_insert_id(),$q); // untested
 }
 
 ?>
