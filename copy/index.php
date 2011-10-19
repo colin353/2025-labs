@@ -8,24 +8,16 @@ EOT
 );
 
 define("INDEX_LATEST", <<<EOT
-	<h1>A crazy app we made</h1>
-	<p>IT does some crazy things</p>
-	<p>Man let me tell you it is so crazy yo</p>
-EOT
-);
-
-define("INDEX_BIOS", <<<EOT
-	<h1>Employee A</h1>
-	<p>I never liked him very much</p>
-	<h1>Employee B</h1>
-	<p>I never liked him very much either</p>
+	<h1>The site has been created!</h1>
+	<p>We are live now at <a href=http://2025-labs.com>http://2025-labs.com</a>!</p>
+	<p></p>
 EOT
 );
 
 define("INDEX_CONTACT", <<<EOT
-	<h1>Phone us</h1>
-	<p>We have a phone</p>
-	<p>etc</p>	
+	<h1>Contact us</h1>
+	<p>If you have an idea for a project that we can collaborate on, let us know by emailing us at <a href="mailto:public@2025-labs.com">public@2025-labs.com</a></p>
+	
 EOT
 );
 

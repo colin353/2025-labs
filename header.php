@@ -14,7 +14,9 @@ include('/include/init.php');
 <!-- Date: 2011-09-29 -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="/js/jquery_shim.js"></script>
+<script src="/js/jquery-fancy.js"></script>
 
 <script src="js/bg_full.js"></script>
-			
+<link rel="shortcut icon" href="/favicon.png" />
 <link rel=stylesheet href="style/style.css" />

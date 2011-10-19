@@ -11,9 +11,16 @@
   src: url('/fonts/Vera.ttf');
 }
 
-body { overflow: hidden;	font-family: Bits, 'Arial'; }
+body { 
+	overflow: hidden;	font-family: Bits, 'Arial';
+	background-image: url("/images/bgimage.png");
+	background-repeat: repeat;
+	background-color: #DDDDDD; 
+}
 
-
+div#header > ul > li:hover {
+		cursor: pointer;
+}
 
 div#header > img { 
 	width: 400px; 
@@ -40,6 +47,26 @@ div#header > ul > li {
 }
 
 div#header { }
+div#supersuperdiv {
+	position:absolute;
+	bottom: 0px;
+}
+
+div#superdiv {
+	height: 100%;
+	position:relative;
+	
+}
+
+div#superdiv > div {	
+	position: absolute;
+	top: 900px;
+	background-color: white;
+	opacity: 0.9;
+	width: 700px;
+	padding: 20px;
+	overflow: auto;
+}
 
 div#shim { 
 	position: absolute; z-index: 0; 
@@ -52,7 +79,7 @@ div#shim {
 	z-index: -1;
 }
 
-div#content_shim {
+div.shim {
 	position: absolute;
 	left: 40px;
 	top: 230px;

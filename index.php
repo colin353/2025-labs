@@ -9,7 +9,7 @@ if(isAuthenticated()) header('Location: /collaborate/')
 	
 var menuitem = 0;
 	
-function golink(target) {
+/*function golink(target) {
 	if(target == menuitem) return;
 	if(target == 0) {
 		$('#login_box').show('fast');
@@ -29,6 +29,57 @@ function golink(target) {
 			$('#content_shim').show('fast');				
 	});
 	menuitem = target;			
+}*/
+colors = Array(5);
+colors[0] = "#DDDDDD";
+colors[1] = "#FFDDAA";
+colors[2] = "#AADDAA";
+colors[3] = "#DDAAAA";
+colors[4] = "#AAAADD";
+	
+function golink(target) {
+	if(target == menuitem) return;
+	
+	$('body').animate({
+			'background-color':colors[target]
+		},'slow');
+	
+	
+	
+	if(target == 0) {
+		/*$('#content_shim').hide('fast');
+		$('#content').hide('fast');*/
+		
+		
+		
+		for(i=1;i<=4;i++) {
+			$('div.menuitem'+i).animate({ 
+				top: -100
+			},500,function() {
+				$('#login_box').show('fast');
+				$('#login_shim').show('fast');
+			});
+		}
+		
+		menuitem = 0;
+		return;
+	}
+	
+		
+	
+	for(i=1;i<=4;i++) {
+		$('div.menuitem'+i).animate({ 
+			top: 150 - .9*$(window).height(),
+			left: 40+(i-target)*0.8*$(window).width() 
+		},400);
+	}
+	
+	$('#login_box').hide('fast');
+	$('#login_shim').hide('fast');
+
+	
+
+	menuitem = target;			
 }
 </script>
 	
@@ -36,7 +87,7 @@ function golink(target) {
 </head>
 <body>
 	
-<img onClick="golink(0)" src="/images/activate.jpg" id="bg" alt="">
+<!--img onClick="golink(0)" src="/images/activate.jpg" id="bg" alt=""-->
 
 <div id="header">
 	<img  onClick="golink(0)" src="/images/2025.png" />
@@ -60,15 +111,54 @@ function golink(target) {
 </div>
 <div id="login_shim"> </div>
 
-<div id=content></div> 
-
-<div class='menuitem1 hiding'><?php echo INDEX_ABOUT; ?></div>
-<div class='menuitem2 hiding'><?php echo INDEX_LATEST; ?></div>
-<div class='menuitem3 hiding'><?php echo INDEX_BIOS; ?></div>
-<div class='menuitem4 hiding'><?php echo INDEX_CONTACT; ?></div>
-
+<div id=supersuperdiv>
+<div id=superdiv>
+	<div onClick="golink(1)" class='menuitem1'><?php echo INDEX_ABOUT; ?></div>
+	<div onClick="golink(2)" class='menuitem2'><?php echo INDEX_LATEST; ?></div>
+	<div onClick="golink(3)" class='menuitem3'>
+		<?php
+		
+		$us = mysql_query('select * from users order by rand()');
+		while($u = mysql_fetch_assoc($us)) {
+			echo "<h1>".$u['user_realname']."</h1>";		
+			echo "<p>".$u['user_publicdesc']."</p>";		
+		}
+		
+		
+		?>
+	</div>
+	<div onClick="golink(4)" class='menuitem4'><?php echo INDEX_CONTACT; ?></div>
+</div>
+</div>
 <div id="shim"> </div>
-<div id="content_shim"> </div>
+
+<script>
+	function doStuff() {
+		for(i=1;i<=4;i++) {
+			if(menuitem == 0) { 
+				$('div.menuitem'+(i)).css('top',-100);		
+				$('div.menuitem'+(i)).css('left',40+(i-1)*0.8*$(window).width());
+			} else {
+				for(i=1;i<=4;i++) {
+					$('div.menuitem'+i).animate({ 
+					top: 150,
+					left: 40+(i-target)*0.8*$(window).width() 
+				},400);
+			}
+				
+			}
+			
+			$('div.menuitem'+(i)).css('width',0.6*$(window).width());	
+			$('div.menuitem'+(i)).css('height',0.6*$(window).height());	
+		}
+		
+	}
+	$(window).resize(function() {
+                doStuff();
+        }).trigger("resize");
+        
+        doStuff();
+</script>
 
 <?php include("footer.php"); ?>
 

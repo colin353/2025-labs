@@ -158,11 +158,11 @@ function projBalance($p) {
 	
 	$debits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_d.account_owner_id = $p and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_d.account_type = 'project'"));
 	
-	$balance += $debits['t'];
+	$balance -= $debits['t'];
 	
-	$credits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_c.account_owner_id = $p and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_c.account_type = 'project'"));
+	$credits = mysql_fetch_assoc(mysql_query($queros="select sum(transaction_value) as t from transactions,accounts as ac_d, accounts as ac_c where ac_c.account_owner_id = $p and ac_d.account_id = transaction_debtor and ac_c.account_id = transaction_creditor and ac_d.account_type != 'shareholder' and ac_c.account_type = 'project'"));
 	
-	$balance -= $credits['t'];
+	$balance += $credits['t'];
 	
 	return $balance;
 }
