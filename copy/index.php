@@ -3,7 +3,7 @@
 define("INDEX_ABOUT", <<<EOT
 	<h1>Hi.</h1>
 	<p>Welcome to 2025 laboratories.</p>
-	<p>We are an engineering collective interested in software, electronics, robotics, and the future. </p>
+	<p>We are an engineering research and consulting group interested in software, visualization, electronics, robotics, and the future. </p>
 EOT
 );
 

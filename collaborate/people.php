@@ -4,7 +4,7 @@ if(isset($_REQUEST['q'])) {
 		
 }
 
-$users = mysql_query('select * from users limit 0,10');
+$users = mysql_query('select * from users order by rand() limit 0,10');
 ?>
 
 <p><?php echo COLLAB_PEOPLE_SEARCH1; ?></p><br />
@@ -21,8 +21,6 @@ while($u = mysql_fetch_assoc($users)) {
 		<p><b><?php echo COLLAB_PEOPLE_ENTRY2;?></b> <span> <?php echo format_dollars(myBalance($u['user_id'])); ?>  </span></p>
 		
 	</div>
-	
-	
 	
 	<?php	
 }

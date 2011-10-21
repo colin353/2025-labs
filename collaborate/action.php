@@ -128,7 +128,7 @@ else if(isset($_REQUEST['fundrequest']) && $_REQUEST['fundrequest'] == 'true') {
 			$insert_id = mysql_insert_id();		
 			$acc = myQuery("select * from accounts where account_id = $d");
 			$pid = $acc['account_owner_id'];
-			eventLog("funded a project",$insert_id,$pid); // working
+			eventLog("contributed to funding a project",$insert_id,$pid); // working
 		} else {
 			$a = myBalance();
 			$freq = myQuery("select * from accounts where account_type = 'shareholder' and account_owner_id = $u");
@@ -137,7 +137,8 @@ else if(isset($_REQUEST['fundrequest']) && $_REQUEST['fundrequest'] == 'true') {
 			$insert_id = mysql_insert_id();		
 			$acc = myQuery("select * from accounts where account_id = $d");
 			$pid = $acc['account_owner_id'];
-			eventLog("funded a request",$insert_id,$pid); // working
+			eventLog("contributed to a funding request",$insert_id,$pid); // working
+			return;			
 			$a = $total - $a;
 			$code = md5($code);
 			$freq = myQuery("select * from accounts where account_type = 'pocket' and account_owner_id = $u");

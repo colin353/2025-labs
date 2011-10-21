@@ -124,15 +124,18 @@ function eventLog($t,$id=0,$pid=0) {
 
 function greet() {
 		$gc = 0;
-		$greets[$gc++] = "Good to see you";
-		$greets[$gc++] = "Welcome back";
-		$greets[$gc++] = "Well hello";
-		$greets[$gc++] = "Ahoy";
+		$greets[$gc++] = "Good to see you, <name>";
+		$greets[$gc++] = "Welcome back, <name>";
+		$greets[$gc++] = "Well hello, <name>";
+		$greets[$gc++] = "Ahoy, <name>";
 		$greets[$gc++] = "The prodigal son returns";
-		if(date("a") == "pm") $greets[$gc++] = "Good afternoon";
-		else $greets[$gc++] = "Good morning";
+		$greets[$gc++] = "Good news, everyone!";
+		if(date("a") == "pm") $greets[$gc++] = "Good afternoon, <name>";
+		else $greets[$gc++] = "Good morning, <name>";
 		
-		return $greets[rand(0,$gc-1)].", ".getFirstName($_SESSION['user_realname']).".";
+		
+		return str_replace("<name>",getFirstName($_SESSION['user_realname']),$greets[rand(0,$gc-1)]);
+	
 	
 }
 

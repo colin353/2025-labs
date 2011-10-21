@@ -16,7 +16,7 @@ while($e = mysql_fetch_assoc($events)) {
 				echo "on <b>".$p['project_name'] . "</b> ";
 			}
 			
-			echo time_to_string(time()-$e['t']); 
+			echo "<span style='margin-left: 5px; color:grey'>".time_to_string(time()-$e['t'])."</span>"; 
 			
 			?>
 			

@@ -16,6 +16,7 @@ body {
 	background-image: url("/images/bgimage.png");
 	background-repeat: repeat;
 	background-color: #DDDDDD; 
+	font-size: 13pt;
 }
 
 div#header > ul > li:hover {

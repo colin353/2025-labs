@@ -32,10 +32,10 @@ var menuitem = 0;
 }*/
 colors = Array(5);
 colors[0] = "#DDDDDD";
-colors[1] = "#FFDDAA";
+colors[1] = "#AACCDD";
 colors[2] = "#AADDAA";
 colors[3] = "#DDAAAA";
-colors[4] = "#AAAADD";
+colors[4] = "#EECC99";
 	
 function golink(target) {
 	if(target == menuitem) return;
