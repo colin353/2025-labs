@@ -16,7 +16,7 @@ while($p = mysql_fetch_assoc($projects)) {
 	
 	<div class="people-entry">
 	
-	<h1><a href='project/<?php echo $p['project_id']; ?>' ><?php echo $p['project_name']; ?> </a></h1>	
+	<h1><a href='project/<?php echo $p['project_id']; ?>' ><?php echo $p['project_name']; ?></a></h1>	
 	<p><b><?php echo COLLAB_PROJECTS_ENTRY1;?></b> <span><?php echo date('F jS Y',strtotime($p['project_creationdate'])); ?> </span></p>
 	<p><b><?php echo COLLAB_PROJECTS_ENTRY2;?></b> <span> <?php echo format_dollars(projBalance($p['project_id'])); ?> </span></p>
 	<p><b><?php echo COLLAB_PROJECTS_ENTRY3;?></b> <span> <?php echo $p['project_description']; ?> </span></p>	

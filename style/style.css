@@ -11,6 +11,11 @@
   src: url('/fonts/Vera.ttf');
 }
 
+a.secretlink {
+	color: inherit;
+	text-decoration: inherit;	
+}
+
 body { 
 	overflow: hidden;	font-family: Bits, 'Arial';
 	background-image: url("/images/bgimage.png");
@@ -31,6 +36,8 @@ div#header > img {
 	top: 20px;
 }
 
+
+
 div#header > ul {
 	
 	/*width: 100%;*/
@@ -48,6 +55,7 @@ div#header > ul > li {
 }
 
 div#header { }
+
 div#supersuperdiv {
 	position:absolute;
 	bottom: 0px;

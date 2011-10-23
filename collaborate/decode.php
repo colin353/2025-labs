@@ -1,6 +1,7 @@
 <?php
 
 function display_page($page) {
+	$_SERVER['PHP_SELFZ'] = $page;
 	include('include/header.php');
 	if(file_exists($page.".php")) include($page.".php");
 	else include("404.php");

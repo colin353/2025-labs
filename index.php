@@ -120,7 +120,7 @@ function golink(target) {
 		
 		$us = mysql_query('select * from users order by rand()');
 		while($u = mysql_fetch_assoc($us)) {
-			echo "<h1>".$u['user_realname']."</h1>";		
+			echo "<h1><a class=secretlink href='mailto:".$u['user_email']."'>".$u['user_realname']."</a></h1>";		
 			echo "<p>".$u['user_publicdesc']."</p>";		
 		}
 		

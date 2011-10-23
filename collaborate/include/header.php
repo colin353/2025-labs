@@ -34,10 +34,30 @@
 <img onClick="goto('/collaborate/')" src="/images/2025.png" />
 	
 	<ul> 
+		<?php
+		$links['projects'] = COLLAB_MENU1;
+		$links['ideas'] = COLLAB_MENU_IDEA;
+		$links['finances'] = COLLAB_MENU2;
+		$links['people'] = COLLAB_MENU3;
+		$links['logout.php'] = COLLAB_MENU_LOGOUT;
+		
+		
+		foreach($links as $l => $n) {
+			echo "<!-- ".$_SERVER["PHP_SELFZ"]." -->";
+			if($_SERVER["PHP_SELFZ"] == $l) $selected = "class=selected";
+			else $selected = "";
+			echo "<li $selected><a href='".BASE_URL."$l'>$n</a></li>\n";
+		}
+		
+		/*		
 		<li><a href="<?php echo BASE_URL; ?>projects"><?php echo COLLAB_MENU1;?></a></li>
+		
+		<li><a href="<?php echo BASE_URL; ?>ideas"><?php echo COLLAB_MENU_IDEA;?></a></li>	
 		<li><a href="<?php echo BASE_URL; ?>finances"><?php echo COLLAB_MENU2;?></a></li>
 		<li><a href="<?php echo BASE_URL; ?>people"><?php echo COLLAB_MENU3;?></a></li>
-		<li><a href="<?php echo BASE_URL; ?>logout.php"><?php echo COLLAB_MENU_LOGOUT;?></a></li>	
+		<li><a href="<?php echo BASE_URL; ?>logout.php"><?php echo COLLAB_MENU_LOGOUT;?></a></li> */
+		
+		?>	
 	</ul>
 
 </div>
