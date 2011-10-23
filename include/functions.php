@@ -128,7 +128,7 @@ function greet() {
 		$greets[$gc++] = "Welcome back, <name>";
 		$greets[$gc++] = "Well hello, <name>";
 		$greets[$gc++] = "Ahoy, <name>";
-		$greets[$gc++] = "The prodigal son returns";
+		$greets[$gc++] = "The prodigal son returns!";
 		$greets[$gc++] = "Good news, everyone!";
 		if(date("a") == "pm") $greets[$gc++] = "Good afternoon, <name>";
 		else $greets[$gc++] = "Good morning, <name>";

@@ -196,5 +196,11 @@ else if(isset($_REQUEST['income_report']) && $_REQUEST['income_report'] == "true
 	eventLog("reported a new income",mysql_insert_id(),$q); // untested
 	eventLog("balanced some books",mysql_insert_id(),$q); // untested
 }
-
+else if(isset($_REQUEST['create_comment']) && $_REQUEST['create_comment'] == "true") {
+		foreach(array('reply_to','comment_text','comment_unique') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
+		$u = $_SESSION['user_id'];
+		$comment_unique = md5($comment_unique . $comment_text);
+		mysql_query("insert into comments (comment_context, comment_owner,comment_replyto,comment_unique,comment_text) values ('inherit',$u,$reply_to,'$comment_unique','$comment_text')") or die(mysql_error());	
+		eventLog("wrote a comment",mysql_insert_id()); // untested	
+}
 ?>

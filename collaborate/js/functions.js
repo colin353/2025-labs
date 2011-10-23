@@ -83,3 +83,19 @@ function fundRequest(req,amt,securityCode) {
 		 }
 	);
 }
+
+function fundRequest(req,amt,securityCode) {
+		$.post(BASE_URL+'action.php',{fundrequest: true, r: req, a: amt,code :securityCode}, function(data) {
+	  			//alert(data);
+	  			window.location.reload(true);
+		 }
+	);
+}
+
+function post_comment(req,amt,securityCode) {
+		$.post(BASE_URL+'action.php',$("#comment_form").serialize(), function(data) {
+	  			alert(data);
+	  			window.location.reload(true);
+		 }
+	);
+}
