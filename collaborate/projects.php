@@ -1,6 +1,6 @@
 <?php
 
-$projects = mysql_query('select * from projects limit 0,10')
+$projects = mysql_query('select * from projects order by project_creationdate desc limit 0,10')
 
 
 ?>

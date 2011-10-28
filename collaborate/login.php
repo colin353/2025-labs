@@ -19,9 +19,9 @@ else {
 }
 
 
-if(isset($_SERVER['HTTP_REFERER'])) 
-	header('Location: '.$_SERVER['HTTP_REFERER']);
+if(isset($_REQUEST['direct'])) 
+	header('Location: '.$_REQUEST['direct']);
 else 
-	header('Location: /')
+	header('Location: /');
 	
 ?>

@@ -94,8 +94,17 @@ function fundRequest(req,amt,securityCode) {
 
 function post_comment(req,amt,securityCode) {
 		$.post(BASE_URL+'action.php',$("#comment_form").serialize(), function(data) {
-	  			alert(data);
+	  			//alert(data);
 	  			window.location.reload(true);
+		 }
+	);
+}
+
+
+function idea_vote(vote,idea_id) {
+		$.post(BASE_URL+'action.php',{'vote':vote,'idea_id':idea_id,voting:'true'}, function(data) {
+	  			//alert(data);
+	  			//window.location.reload(true);
 		 }
 	);
 }

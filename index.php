@@ -1,7 +1,10 @@
 <?php include("header.php"); 
 
-if(isAuthenticated()) header('Location: /collaborate/')
-
+if(isAuthenticated()) header('Location: /collaborate/');
+$ref = "/";
+if(isset($_SESSION['deauthenticated'])) {
+	$ref = $_SESSION['ref'];	
+} else $ref = "/";
 ?>
 
 	
@@ -106,6 +109,7 @@ function golink(target) {
 		<form id=login_form action='collaborate/login.php' method='post'>
 			<input autofocus type=text placeholder="username" name=username />
 			<input type=password placeholder="password" name=password />
+			<input type=hidden name=direct value='<?php echo $ref; ?>' />
 			<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />
 		</form>
 </div>

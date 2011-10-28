@@ -1,7 +1,19 @@
 <script>
 	function makeComment(id) {
 		$("#reply_to").val(id);
-		$("#comment_type").show('fast');		
+		$("#comment_type").hide('fast',function() {
+				$("textarea#replyhere").val("");
+			
+			$("#comment_type").show('fast',function() {
+				
+				
+					$("html").animate({ scrollTop: $(document).height() }, "slow");
+				
+			});	
+		});	
+		
+		
+		$("textarea#replyhere").focus();	
 	}	
 </script>
 
@@ -13,9 +25,11 @@ function displayCommentThread($c,$l=0) {
 	if($l > 10) return;
 ?>
 	<div class=comment_level>
-	<div class=comment>
+	<div style="border-left: 5px solid #<?php echo $c['user_colour']; ?>" class=comment>
 		<p><?php echo $c['comment_text']; ?></p>
-		<a onClick="makeComment(<?php echo $c['comment_id']; ?>)" style="float: right; margin-right: 20px;" href=#>reply</a><p style="color: grey;">posted by <?php echo $c['user_realname'].', '.time_to_string(time()-$c['t']).''; ?></p>	
+		<a onClick="makeComment(<?php echo $c['comment_id']; ?>)" href=#>reply</a>
+		<?php if($l == 10) echo "<a href='".BASE_URL."view-comment/".$c['comment_id']."'>view</a>"; ?>
+		<p style="color: grey;">posted by <?php echo $c['user_realname'].', '.time_to_string(time()-$c['t']).''; ?></p>	
 	</div>
 <?php
 	
@@ -31,10 +45,11 @@ displayCommentThread($c);
 <div id=comment_type class=hiding>
 <form  action=action.php id=comment_form class=inputForm method=post>
 	<p>Write a comment:</p>
-	<textarea placeholder="Write your comment here..." name=comment_text></textarea>
+	<textarea id=replyhere placeholder="Write your comment here..." name=comment_text></textarea>
 	<br />
 	<input type=hidden id=reply_to name=reply_to value=fail />
 	<input type=hidden name=create_comment value=true />
+	<input type=hidden name=comment_context value=inherit />
 	<input type=hidden name=comment_unique value=<?php echo rand().rand(); ?> />
 	<input type=button onclick="return post_comment()&&false;" value=Reply />
 </form></div>

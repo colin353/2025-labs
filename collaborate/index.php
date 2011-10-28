@@ -4,7 +4,7 @@
 
 <?php
 
-$events = mysql_query('select *,unix_timestamp(event_creationdate) as t from events,users where event_user_id = user_id order by event_creationdate desc limit 0,5');
+$events = mysql_query('select *,unix_timestamp(event_creationdate) as t from events,users where event_user_id = user_id order by event_creationdate desc limit 0,10');
 
 while($e = mysql_fetch_assoc($events)) {
 	?>

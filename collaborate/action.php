@@ -197,10 +197,27 @@ else if(isset($_REQUEST['income_report']) && $_REQUEST['income_report'] == "true
 	eventLog("balanced some books",mysql_insert_id(),$q); // untested
 }
 else if(isset($_REQUEST['create_comment']) && $_REQUEST['create_comment'] == "true") {
-		foreach(array('reply_to','comment_text','comment_unique') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
+		foreach(array('reply_to','comment_text','comment_unique','comment_context') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
 		$u = $_SESSION['user_id'];
 		$comment_unique = md5($comment_unique . $comment_text);
-		mysql_query("insert into comments (comment_context, comment_owner,comment_replyto,comment_unique,comment_text) values ('inherit',$u,$reply_to,'$comment_unique','$comment_text')") or die(mysql_error());	
+		mysql_query("insert into comments (comment_context, comment_owner,comment_replyto,comment_unique,comment_text) values ('$comment_context',$u,$reply_to,'$comment_unique','$comment_text')") or die(mysql_error());	
 		eventLog("wrote a comment",mysql_insert_id()); // untested	
+
+		$ep = myQuery("select * from comments, users where comment_id = $reply_to and comment_owner = user_id");
+		if($ep['user_id'] != $_SESSION['user_id']) sendEmailMessage($ep['user_id'],"<b>".getFirstName($_SESSION['user_realname'])."</b> replied to a <a href='http://2025-labs.com/collaborate/view-comment/".$reply_to."'>comment</a> you wrote");
 }
+else if(isset($_REQUEST['create_idea']) && $_REQUEST['create_idea'] == "true") {
+		foreach(array('title','desc','idea_unique') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
+		$u = $_SESSION['user_id'];
+		$idea_unique = md5($idea_unique . $desc);
+		mysql_query("insert into ideas (idea_title, idea_description,idea_creator,idea_unique) values ('$title','$desc',$u,'$idea_unique')") or die(mysql_error());	
+		eventLog("created a new idea",$i=mysql_insert_id()); // untested
+		header("location: ".BASE_URL."idea/".$i);	
+}	
+else if(isset($_REQUEST['voting']) && $_REQUEST['voting'] == "true") {
+		foreach(array('vote','idea_id') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
+		$u = $_SESSION['user_id'];
+		mysql_query("insert into votes (vote_owner, vote_vote,vote_user,vote_context) values ('$idea_id','$vote',$u,'ideavote')") or die(mysql_error());	
+		eventLog("voted on an idea",$i=mysql_insert_id()); // untested
+}	
 ?>

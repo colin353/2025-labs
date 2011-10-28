@@ -97,7 +97,9 @@ div#header > ul {
 	display: inline;
 }
 
-
+div.comment > a {
+	 float: right; margin-right: 20px; 
+}
 
 a:hover {
 	text-decoration: underline;
@@ -114,6 +116,13 @@ h1 {
 
 b {
 	font-weight: bold;	
+}
+
+div.colourbox {
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	margin-left:20px;
 }
 
 div#header {
@@ -313,15 +322,20 @@ div.fund_request_complete {
 }
 
 div.comment {
-	border: 3px dashed gray; 
+	/*border: 3px dashed gray;*/
+	border: 1px solid black; 
 	width: 800px;
 	margin-top: 15px;	
 }
 
 div.comment > p, div.comment > h3 {
 	margin-left: 20px;	
+	margin-right: 20px;
+	overflow: hidden;
+	word-wrap: break-word;
 }
 
 div.comment_level {
-	padding-left: 15px;	
+	padding-left: 25px;	
+	/*border-left: 3px solid gray;*/
 }

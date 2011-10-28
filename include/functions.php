@@ -130,8 +130,9 @@ function greet() {
 		$greets[$gc++] = "Ahoy, <name>";
 		$greets[$gc++] = "The prodigal son returns!";
 		$greets[$gc++] = "Good news, everyone!";
-		if(date("a") == "pm") $greets[$gc++] = "Good afternoon, <name>";
-		else $greets[$gc++] = "Good morning, <name>";
+
+		$greets[$gc++] = "Good afternoon, <name>";
+		$greets[$gc++] = "I can't do that, <name>";
 		
 		
 		return str_replace("<name>",getFirstName($_SESSION['user_realname']),$greets[rand(0,$gc-1)]);
@@ -236,6 +237,9 @@ function balance_the_books($p, $val,$code) {
 		}
 		
 }
-
+function sendEmailMessage($target,$html) {
+	$html = mysql_real_escape_string($html);
+	mysql_query("insert into messages (message_user_id,message_text) values ('$target','$html')");	
+}
 
 ?>
