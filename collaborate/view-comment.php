@@ -26,7 +26,7 @@ function displayCommentThread($c,$l=0) {
 ?>
 	<div class=comment_level>
 	<div style="border-left: 5px solid #<?php echo $c['user_colour']; ?>" class=comment>
-		<p><?php echo $c['comment_text']; ?></p>
+		<p><?php echo str_replace("\n","<br />",$c['comment_text']); ?></p>
 		<a onClick="makeComment(<?php echo $c['comment_id']; ?>)" href=#>reply</a>
 		<?php if($l == 10) echo "<a href='".BASE_URL."view-comment/".$c['comment_id']."'>view</a>"; ?>
 		<p style="color: grey;">posted by <?php echo $c['user_realname'].', '.time_to_string(time()-$c['t']).''; ?></p>	
