@@ -7,6 +7,11 @@
 $events = mysql_query('select *,unix_timestamp(event_creationdate) as t from events,users where event_user_id = user_id order by event_creationdate desc limit 0,10');
 
 while($e = mysql_fetch_assoc($events)) {
+		
+		if($e['event_text'] == "wrote a comment") {
+			$e['event_text'] = "<a href='".BASE_URL."view-comment/".$e['event_relevant_id']."'>".$e['event_text']."</a>";
+		}
+	
 	?>
 	
 		<h3><?php echo getFirstName($e['user_realname']); ?><span class=sidenote><?php echo $e['event_text']; ?>

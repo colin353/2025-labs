@@ -81,6 +81,31 @@ function displayActionMenu($k) {
 <?php
 }
 
+function create_browsersession() {
+	$s['l'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);
+	$s['t'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);	
+	
+	mysql_query("insert into qrlogin_sessions (session_qrlink, session_token) values ('".$s['l']."','".$s['t']."')");
+	
+	return $s;
+}
+
+function create_verifysession() {
+	$s['l'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);
+	$s['t'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);	
+	
+	mysql_query("insert into qrlogin_sessions (session_qrlink, session_token,session_type) values ('".$s['l']."','".$s['t']."','verification')");
+	
+	return $s;
+}
+
+function create_qridentity() {
+	$id = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);	
+	mysql_query("delete from qrlogin_identities where identity_user = ".$_SESSION['user_id']);
+	mysql_query("insert into qrlogin_identities (identity_user,identity_identity,identity_activated) values ('".$_SESSION['user_id']."','$id',0)") or die(mysql_error());
+	return $id;
+}
+
 function getProjectState($pid) {
 	$pid = mysql_real_escape_string($pid);
 	$ps = mysql_query("select *, ( (select count(*) from todolist where todolist_status = 1 and todolist_milestone_id = todolistmilestone_id) / (select count(*) from todolist where todolist_milestone_id = todolistmilestone_id))  as percentagecomplete

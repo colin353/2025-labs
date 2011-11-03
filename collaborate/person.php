@@ -70,4 +70,19 @@ if($_SESSION['user_id'] == $_REQUEST['q']) {
 	<input type=submit value="Set New Password"/>
 </form>
 
+<h1>Verify smartphone:</h1>
+
+<p>
+<?php 
+
+$phones = mysql_query("select * from qrlogin_identities where identity_user = ".$_SESSION['user_id']);
+if(mysql_num_rows($phones) > 0) echo "You already have a verified smartphone.";
+else echo "You don't have a verified smartphone yet."
+
+
+ ?> <a href=<?php echo BASE_URL; ?>verify/>Verify my phone.</a>
+</p>
+
+
+
 <?php } ?>

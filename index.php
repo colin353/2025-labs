@@ -1,15 +1,67 @@
-<?php include("header.php"); 
+<?php 
+include("header.php");
+require('include/qrlogin.php'); 
 
 if(isAuthenticated()) header('Location: /collaborate/');
 $ref = "/";
 if(isset($_SESSION['deauthenticated'])) {
 	$ref = $_SESSION['ref'];	
 } else $ref = "/";
+
+
+// qrlogin session start!
+
+$qrlogin_creds = create_browsersession();
+
+
 ?>
 
-	
+<script src="/js/jquery.qtip.min.js"> </script>
 <script type=text/javascript>
-	
+
+// Create the tooltips only on document load
+$(document).ready(function() 
+{
+   // Match all link elements with href attributes within the content div
+   $('#login_box').qtip(
+   {
+      content: { 
+      	text: 'Verified? <br />Sign in with your phone! <br /> <img src=/qr.php?q=<?php echo $qrlogin_creds['l']; ?> />',
+      	prerender: true
+      	}, // Give it some content, in this case a simple string
+      	show: 'mouseover',
+      	style: {
+      		tip: {
+      			corner: 'leftMiddle',
+      			color: '#555555'
+      		}
+      	},
+      	position: {
+      corner: {
+         target: 'rightMiddle',
+         tooltip: 'leftMiddle'
+      }
+   }
+   });
+   
+   $('#username_text').focus(function() {
+   		$('#login_box').qtip('show');
+   })
+   
+   function listen() {
+    $.get("/comet.php?q=<?php echo $qrlogin_creds['l']; ?>", {}, function(data) {
+        if(data == '') listen(); // then launch again
+        else {
+        	$.post("<?php echo BASE_URL . "login.php"; ?>",{a: "<?php echo $qrlogin_creds['l']; ?>", b: data},function () {
+				window.location = "/";       		
+        	});       	
+        }
+    });
+};
+
+listen();   
+});
+
 var menuitem = 0;
 	
 /*function golink(target) {
@@ -107,7 +159,7 @@ function golink(target) {
 <div id=login_box>
 		<span><?php echo HEADER_LOGIN_HERE; ?></span>
 		<form id=login_form action='collaborate/login.php' method='post'>
-			<input autofocus type=text placeholder="username" name=username />
+			<input autofocus id=username_text type=text placeholder="username" name=username />
 			<input type=password placeholder="password" name=password />
 			<input type=hidden name=direct value='<?php echo $ref; ?>' />
 			<input type="submit" value="Submit the form!" style="position: absolute; top: 0; left: 0; z-index: 0; width: 1px; height: 1px; visibility: hidden;" />

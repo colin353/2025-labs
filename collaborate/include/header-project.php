@@ -20,7 +20,7 @@ if(mysql_num_rows(mysql_query("select * from projectmemberships where projectmem
 
 $k['overview'] = 'project/'.$_REQUEST['q'];
 $k['to-do list'] = 'project-to-do/'.$_REQUEST['q'];
-$k['finances'] = 'funding-requests/'.$_REQUEST['q'];
+//$k['finances'] = 'funding-requests/'.$_REQUEST['q'];
 } else {	
 	$k['overview'] = 'project/'.$_REQUEST['q'];
 	$k['finances'] = 'funding-requests/'.$_REQUEST['q'];
