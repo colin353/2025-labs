@@ -38,6 +38,7 @@
 		$links['projects'] = COLLAB_MENU1;
 		$links['ideas'] = COLLAB_MENU_IDEA;
 		//$links['finances'] = COLLAB_MENU2;
+		$links['tasks'] = 'tasks';
 		$links['people'] = COLLAB_MENU3;
 		$links['logout.php'] = COLLAB_MENU_LOGOUT;
 		

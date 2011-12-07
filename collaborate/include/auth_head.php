@@ -1,6 +1,6 @@
 <?php
 
-include('../include/init.php');
+@include_once('../include/init.php');
 
 
 if(!isAuthenticated()) {

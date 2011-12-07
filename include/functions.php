@@ -84,7 +84,7 @@ function displayActionMenu($k) {
 function create_browsersession() {
 	$s['l'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);
 	$s['t'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);	
-	
+	mysql_query("delete from qrlogin_sessions where (unix_timestamp(now()) - unix_timestamp(session_creationdate)) > 120") or die(mysql_error());
 	mysql_query("insert into qrlogin_sessions (session_qrlink, session_token) values ('".$s['l']."','".$s['t']."')");
 	
 	return $s;
@@ -93,7 +93,6 @@ function create_browsersession() {
 function create_verifysession() {
 	$s['l'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);
 	$s['t'] = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,10);	
-	
 	mysql_query("insert into qrlogin_sessions (session_qrlink, session_token,session_type) values ('".$s['l']."','".$s['t']."','verification')");
 	
 	return $s;
@@ -149,15 +148,15 @@ function eventLog($t,$id=0,$pid=0) {
 
 function greet() {
 		$gc = 0;
-		$greets[$gc++] = "Good to see you, <name>";
-		$greets[$gc++] = "Welcome back, <name>";
-		$greets[$gc++] = "Well hello, <name>";
-		$greets[$gc++] = "Ahoy, <name>";
+		$greets[$gc++] = "Good to see you, <name>.";
+		$greets[$gc++] = "Welcome back, <name>.";
+		$greets[$gc++] = "Well hello, <name>.";
+		$greets[$gc++] = "Ahoy, <name>!";
 		$greets[$gc++] = "The prodigal son returns!";
 		$greets[$gc++] = "Good news, everyone!";
 
-		$greets[$gc++] = "Good afternoon, <name>";
-		$greets[$gc++] = "I can't do that, <name>";
+		$greets[$gc++] = "Good afternoon, <name>.";
+		$greets[$gc++] = "I can't do that, <name>.";
 		
 		
 		return str_replace("<name>",getFirstName($_SESSION['user_realname']),$greets[rand(0,$gc-1)]);
@@ -195,6 +194,8 @@ function projBalance($p) {
 	
 	return $balance;
 }
+
+
 
 function balance_the_books($p, $val,$code) {
 		// The function for accepting and redistributing project income

@@ -1,0 +1,52 @@
+
+input[type="text"] {
+	border: none;
+	font-size: 24px;
+	border-bottom: 3px dotted gray;	
+}
+div.project_list > div > ul > li:hover {
+	background-color: #F9F9F9;
+}
+
+div.task_list > p {
+	color: gray;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+div.task_list > ul > li {
+	font-size: 18pt;
+	list-style: none;
+	margin-top: 10px;
+}
+div.task_list > ul > li > input[type="checkbox"] {
+	margin-right: 20px;	
+}
+
+div.selector > span.selected {
+	border: 1px solid black;
+}
+
+div.selector {
+	margin-left: 20px;
+}
+
+div.selector > span {
+	margin-right: 20px;
+	padding: 3px;
+}
+
+ul#trashul {
+	display: none;
+	height: 10px;
+	background-color: #D73B3E;
+	left: 0;
+    position: absolute;
+    top: 0px;
+    margin:0;
+    width: 100%;
+}
+
+ul#trashul > li {
+	display: none;	
+}

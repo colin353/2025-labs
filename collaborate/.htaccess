@@ -12,5 +12,6 @@ RewriteCond %{REQUEST_URI} !/*images/(.*)
 RewriteCond %{REQUEST_URI} !/*style/(.*) 
 RewriteCond %{REQUEST_URI} !/*js/(.*) 
 RewriteCond %{REQUEST_URI} !/*css/(.*) 
+RewriteCond %{REQUEST_URI} !/*ajax/(.*) 
 RewriteCond %{REQUEST_URI} !/action.php
 RewriteRule ^(.*?)$ decode.php

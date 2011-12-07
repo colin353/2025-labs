@@ -200,11 +200,21 @@ else if(isset($_REQUEST['create_comment']) && $_REQUEST['create_comment'] == "tr
 		foreach(array('reply_to','comment_text','comment_unique','comment_context') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);
 		$u = $_SESSION['user_id'];
 		$comment_unique = md5($comment_unique . $comment_text);
-		mysql_query("insert into comments (comment_context, comment_owner,comment_replyto,comment_unique,comment_text) values ('$comment_context',$u,$reply_to,'$comment_unique','$comment_text')") or die(mysql_error());	
-		eventLog("wrote a comment",mysql_insert_id()); // untested	
-
+		
 		$ep = myQuery("select * from comments, users where comment_id = $reply_to and comment_owner = user_id");
 		if($ep['user_id'] != $_SESSION['user_id']) sendEmailMessage($ep['user_id'],"<b>".getFirstName($_SESSION['user_realname'])."</b> replied to a <a href='http://2025-labs.com/collaborate/view-comment/".$reply_to."'>comment</a> you wrote");
+		
+		$op = $ep['comment_op']; // original poster is inherited
+		if($op == 0) $op = $reply_to;
+		
+		mysql_query("insert into comments (comment_context, comment_owner,comment_replyto,comment_unique,comment_text,comment_op) values ('$comment_context',$u,$reply_to,'$comment_unique','$comment_text','$op')") or die(mysql_error());	
+
+		
+		
+		eventLog("wrote a comment",mysql_insert_id()); // untested	
+
+		
+		
 }
 else if(isset($_REQUEST['create_idea']) && $_REQUEST['create_idea'] == "true") {
 		foreach(array('title','desc','idea_unique') as $k) $$k = mysql_real_escape_string($_REQUEST[$k]);

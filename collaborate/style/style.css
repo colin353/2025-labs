@@ -26,6 +26,10 @@ h2 {
   font-weight: bold;
 }
 
+div#content  p {
+	padding-right: 20%;
+}
+
 div.actions {
 	margin-left: -40px;
 	padding: 0;

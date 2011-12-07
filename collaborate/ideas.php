@@ -3,7 +3,7 @@
 <p>All ideas:<span class=sidenote><a href=<?php echo BASE_URL; ?>new-idea >+ add new idea</a> </span></p><br />
 
 <?php
-$is = mysql_query('select * from ideas where idea_approved = 0 order by idea_creationdate desc');
+$is = mysql_query('select * from ideas where idea_historic = 0 and idea_approved = 0 order by idea_creationdate desc');
 while($p = mysql_fetch_assoc($is)) {
 	
 // Get some votes

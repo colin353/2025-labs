@@ -1,8 +1,12 @@
-<h1><?php echo greet(); ?> </h1>
+<div data-role="header">
+		<h1><?php echo greet(); ?> </h1>
+</div><!-- /header -->
 
+<div data-role="content">	
+		
 <p><h2><?php echo DASH_RECENT; ?></h2></p>
 
-<?php
+		<?php
 
 $events = mysql_query('select *,unix_timestamp(event_creationdate) as t from events,users where event_user_id = user_id order by event_creationdate desc limit 0,20');
 
@@ -32,3 +36,11 @@ while($e = mysql_fetch_assoc($events)) {
 }
 
 ?>
+
+		
+</div><!-- /content -->
+
+<?php ////////////////////////////////////////////////////// ?>
+
+
+

@@ -4,7 +4,7 @@
 
 <script>
 	
-	setTimeout('window.close();',3000);
+	//setTimeout('window.close();',3000);
 	
 </script>
 
